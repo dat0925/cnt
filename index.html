@@ -330,41 +330,48 @@
   .doc-list{
     display:flex;
     flex-direction:column;
-    gap:0;
+    gap:10px;
     margin:24px 0 8px;
     border-top:1px solid var(--line);
+    padding-top:14px;
   }
   .doc-item{
     display:flex;
     align-items:flex-start;
     gap:18px;
-    padding:18px 4px;
-    border-bottom:1px solid var(--line);
+    padding:18px 20px;
+    background:#FBF8F4;
+    border:1px solid var(--line);
+    border-left:3px solid var(--accent);
   }
   .doc-tab{
     flex-shrink:0;
     width:78px;
     text-align:center;
-    padding:6px 4px;
-    border:1px solid var(--accent);
-    color:var(--accent);
+    padding:7px 4px;
+    background:var(--accent);
+    color:#fff;
     font-size:11.5px;
     font-weight:700;
     letter-spacing:0.03em;
     font-feature-settings:"tnum";
   }
   .doc-name{
-    font-size:14px;
+    font-size:14.5px;
+    font-weight:600;
     line-height:1.75;
     color:var(--ink);
     padding-top:4px;
   }
   .doc-required{
-    font-size:10.5px;
-    color:var(--slate-soft);
-    letter-spacing:0.06em;
-    display:block;
-    margin-top:5px;
+    font-size:10px;
+    font-weight:700;
+    color:var(--accent);
+    background:rgba(140,47,57,0.09);
+    letter-spacing:0.07em;
+    display:inline-block;
+    padding:3px 9px;
+    margin-top:8px;
   }
 
   .empty-note{
