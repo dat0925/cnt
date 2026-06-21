@@ -484,6 +484,75 @@
   .btn-primary:hover{ background:#2A3458; }
   .btn-primary:focus-visible{ outline:2px solid var(--accent); outline-offset:3px; }
 
+  /* ---------- Gate screen (access code) ---------- */
+  .gate-screen{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+  }
+  .gate-card{
+    width:100%;
+    max-width:420px;
+    background:var(--surface);
+    border:1px solid var(--line);
+    border-top:3px solid var(--ink);
+    padding:40px 32px;
+  }
+  .gate-card .mark{
+    width:10px;
+    height:10px;
+    background:var(--accent);
+    display:inline-block;
+    margin-bottom:18px;
+  }
+  .gate-card .eyebrow{ margin:0 0 12px; }
+  .gate-title{
+    font-family:"Shippori Mincho", serif;
+    font-weight:700;
+    font-size:21px;
+    line-height:1.6;
+    margin:0 0 12px;
+    letter-spacing:0.02em;
+  }
+  .gate-lede{
+    font-size:13.5px;
+    line-height:1.9;
+    color:var(--slate);
+    margin:0 0 26px;
+  }
+  .gate-form{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    flex-wrap:wrap;
+  }
+  .gate-input{
+    width:140px;
+    padding:13px 14px;
+    font-family:inherit;
+    font-size:24px;
+    text-align:center;
+    letter-spacing:0.5em;
+    color:var(--ink);
+    border:1px solid var(--line);
+    background:var(--surface);
+  }
+  .gate-input:focus-visible{
+    outline:none;
+    border-color:var(--ink);
+  }
+  .gate-submit{
+    flex-shrink:0;
+  }
+  .gate-error{
+    font-size:12.5px;
+    color:var(--accent);
+    margin:14px 0 0;
+    line-height:1.8;
+  }
+
   /* ---------- Transition ---------- */
   .step-panel{
     animation:fadein 180ms ease;
@@ -506,6 +575,31 @@
 </style>
 </head>
 <body>
+
+<div id="gate-screen" class="gate-screen">
+  <div class="gate-card">
+    <span class="mark" aria-hidden="true"></span>
+    <p class="eyebrow">アクセス制限</p>
+    <h1 class="gate-title">認証コードを入力してください</h1>
+    <p class="gate-lede">このページは社内限定の営業支援ツールです。お手元の4桁の認証コードを入力してください。</p>
+    <form id="gate-form" class="gate-form" autocomplete="off">
+      <input
+        id="gate-input"
+        class="gate-input"
+        type="password"
+        inputmode="numeric"
+        pattern="[0-9]*"
+        maxlength="4"
+        autocomplete="off"
+        placeholder="••••"
+        aria-label="4桁の認証コード">
+      <button type="submit" class="btn-primary gate-submit">認証する</button>
+    </form>
+    <p id="gate-error" class="gate-error" style="display:none;" role="alert">認証コードが正しくありません。もう一度ご確認ください。</p>
+  </div>
+</div>
+
+<div id="app-content" style="display:none">
 
 <div class="utility-bar">
   <div class="utility-bar-inner">
@@ -547,6 +641,8 @@
   </footer>
 
 </div><!-- /.page-shell -->
+
+</div><!-- /#app-content -->
 
 <script>
 (function(){
@@ -1002,13 +1098,74 @@
   }
 
   // ---------------------------------------------------------------
-  // 初期化
+  // 初期化（アプリ本体）
   // ---------------------------------------------------------------
-  var today = new Date();
-  document.getElementById("footer-date").textContent =
-    today.getFullYear() + "." + String(today.getMonth()+1).padStart(2,"0") + "." + String(today.getDate()).padStart(2,"0");
+  function initApp(){
+    var today = new Date();
+    document.getElementById("footer-date").textContent =
+      today.getFullYear() + "." + String(today.getMonth()+1).padStart(2,"0") + "." + String(today.getDate()).padStart(2,"0");
 
-  render();
+    render();
+  }
+
+  // ---------------------------------------------------------------
+  // アクセス制限（4桁認証コード）
+  // 簡易的な閲覧制限です。ソースコードを直接確認できる相手への
+  // 厳格なアクセス制御ではない点にご留意ください。
+  // ---------------------------------------------------------------
+  var GATE_KEY = "cnt_sitemaster_access_v1";
+  var GATE_CODE = "2759";
+
+  var gateScreen = document.getElementById("gate-screen");
+  var appContent = document.getElementById("app-content");
+  var gateForm = document.getElementById("gate-form");
+  var gateInput = document.getElementById("gate-input");
+  var gateError = document.getElementById("gate-error");
+
+  function showApp(){
+    gateScreen.style.display = "none";
+    appContent.style.display = "";
+    initApp();
+  }
+
+  function showGate(){
+    gateScreen.style.display = "flex";
+    appContent.style.display = "none";
+    if (gateInput){ gateInput.focus(); }
+  }
+
+  function hasAccess(){
+    try{
+      return window.localStorage.getItem(GATE_KEY) === "granted";
+    } catch(e){
+      return false;
+    }
+  }
+
+  function grantAccess(){
+    try{
+      window.localStorage.setItem(GATE_KEY, "granted");
+    } catch(e){ /* localStorage unavailable: 今回のセッションのみ表示 */ }
+  }
+
+  gateForm.addEventListener("submit", function(e){
+    e.preventDefault();
+    if (gateInput.value === GATE_CODE){
+      gateError.style.display = "none";
+      grantAccess();
+      showApp();
+    } else {
+      gateError.style.display = "block";
+      gateInput.value = "";
+      gateInput.focus();
+    }
+  });
+
+  if (hasAccess()){
+    showApp();
+  } else {
+    showGate();
+  }
 })();
 </script>
 </body>
