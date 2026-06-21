@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>契約書面 判定ガイド｜サイトマイスター</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;700&family=Noto+Sans+JP:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1A2238;
+    --paper:#F6F5F1;
+    --surface:#FFFFFF;
+    --line:#DCD7C9;
+    --accent:#8C2F39;
+    --slate:#5B5F6B;
+    --slate-soft:#8A8D96;
+    --radius:2px;
+  }
+
+  *{ box-sizing:border-box; }
+
+  html,body{
+    margin:0;
+    padding:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:"Noto Sans JP","Hiragino Kaku Gothic ProN","Hiragino Sans",sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  body{
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    padding:48px 20px 64px;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ animation-duration:0.001ms !important; transition-duration:0.001ms !important; }
+  }
+
+  /* ---------- Letterhead ---------- */
+  .letterhead{
+    width:100%;
+    max-width:760px;
+    display:flex;
+    align-items:baseline;
+    justify-content:space-between;
+    padding-bottom:18px;
+    margin-bottom:28px;
+    border-bottom:1px solid var(--ink);
+  }
+  .letterhead .brand{
+    display:flex;
+    align-items:baseline;
+    gap:10px;
+  }
+  .letterhead .mark{
+    width:10px;
+    height:10px;
+    background:var(--accent);
+    display:inline-block;
+    transform:translateY(-1px);
+  }
+  .letterhead .brand-text{
+    font-size:13px;
+    letter-spacing:0.12em;
+    color:var(--slate);
+    font-weight:500;
+  }
+  .letterhead .ref{
+    font-size:11px;
+    color:var(--slate-soft);
+    letter-spacing:0.06em;
+    font-feature-settings:"tnum";
+  }
+
+  /* ---------- Header ---------- */
+  .page-header{
+    width:100%;
+    max-width:760px;
+    margin-bottom:28px;
+  }
+  .eyebrow{
+    font-size:12px;
+    letter-spacing:0.18em;
+    color:var(--accent);
+    font-weight:600;
+    margin:0 0 10px;
+  }
+  h1{
+    font-family:"Shippori Mincho", serif;
+    font-weight:700;
+    font-size:clamp(28px,4vw,38px);
+    line-height:1.4;
+    margin:0 0 12px;
+    letter-spacing:0.02em;
+  }
+  .lede{
+    font-size:14.5px;
+    line-height:1.9;
+    color:var(--slate);
+    margin:0;
+    max-width:560px;
+  }
+
+  /* ---------- Trail ---------- */
+  .trail{
+    width:100%;
+    max-width:760px;
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-bottom:18px;
+    min-height:1px;
+  }
+  .trail-chip{
+    font-size:12px;
+    color:var(--slate);
+    background:var(--surface);
+    border:1px solid var(--line);
+    padding:5px 12px;
+    border-radius:var(--radius);
+    letter-spacing:0.02em;
+    display:flex;
+    align-items:center;
+    gap:6px;
+  }
+  .trail-chip .num{
+    color:var(--slate-soft);
+    font-size:10px;
+    font-feature-settings:"tnum";
+  }
+  .trail-arrow{
+    color:var(--slate-soft);
+    font-size:12px;
+    align-self:center;
+  }
+
+  /* ---------- Card ---------- */
+  .card{
+    width:100%;
+    max-width:760px;
+    background:var(--surface);
+    border:1px solid var(--line);
+    border-top:3px solid var(--ink);
+    padding:40px 44px 44px;
+    position:relative;
+  }
+  @media (max-width:600px){
+    .card{ padding:30px 22px 34px; }
+  }
+
+  .step-tag{
+    font-size:11px;
+    letter-spacing:0.14em;
+    color:var(--slate-soft);
+    font-weight:600;
+    margin:0 0 14px;
+  }
+
+  .back-link{
+    position:absolute;
+    top:40px;
+    right:44px;
+    font-size:12.5px;
+    color:var(--slate);
+    background:none;
+    border:none;
+    cursor:pointer;
+    letter-spacing:0.02em;
+    padding:4px 2px;
+    display:flex;
+    align-items:center;
+    gap:5px;
+  }
+  .back-link:hover{ color:var(--ink); }
+  .back-link:focus-visible{ outline:2px solid var(--accent); outline-offset:3px; }
+  @media (max-width:600px){
+    .back-link{ top:24px; right:22px; }
+  }
+
+  h2.question{
+    font-size:19px;
+    font-weight:700;
+    line-height:1.6;
+    margin:0 0 10px;
+    max-width:520px;
+  }
+  .question-sub{
+    font-size:13.5px;
+    color:var(--slate);
+    line-height:1.85;
+    margin:0 0 28px;
+    max-width:520px;
+  }
+
+  /* ---------- Choice buttons ---------- */
+  .choices{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+  }
+  .choice-btn{
+    text-align:left;
+    width:100%;
+    background:var(--surface);
+    border:1px solid var(--line);
+    border-left:3px solid var(--line);
+    padding:17px 20px;
+    font-family:inherit;
+    font-size:14.5px;
+    font-weight:500;
+    color:var(--ink);
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:16px;
+    transition:border-color 120ms ease, background 120ms ease, padding-left 120ms ease;
+  }
+  .choice-btn .label-main{ line-height:1.6; }
+  .choice-btn .label-sub{
+    display:block;
+    font-size:12px;
+    color:var(--slate-soft);
+    font-weight:400;
+    margin-top:3px;
+  }
+  .choice-btn .arrow{
+    color:var(--slate-soft);
+    font-size:15px;
+    flex-shrink:0;
+    transition:transform 120ms ease;
+  }
+  .choice-btn:hover{
+    border-color:var(--ink);
+    border-left-color:var(--accent);
+    background:#FBFAF8;
+    padding-left:24px;
+  }
+  .choice-btn:hover .arrow{ transform:translateX(3px); color:var(--accent); }
+  .choice-btn:focus-visible{
+    outline:2px solid var(--accent);
+    outline-offset:2px;
+  }
+  .choice-btn:active{ background:#F4F2EE; }
+
+  /* ---------- Result ---------- */
+  .result-status{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    font-size:12px;
+    letter-spacing:0.08em;
+    font-weight:600;
+    color:var(--accent);
+    border:1px solid var(--accent);
+    padding:5px 12px;
+    margin-bottom:20px;
+  }
+
+  .doc-list{
+    display:flex;
+    flex-direction:column;
+    gap:0;
+    margin:24px 0 8px;
+    border-top:1px solid var(--line);
+  }
+  .doc-item{
+    display:flex;
+    align-items:flex-start;
+    gap:18px;
+    padding:18px 4px;
+    border-bottom:1px solid var(--line);
+  }
+  .doc-tab{
+    flex-shrink:0;
+    width:78px;
+    text-align:center;
+    padding:6px 4px;
+    border:1px solid var(--accent);
+    color:var(--accent);
+    font-size:11.5px;
+    font-weight:700;
+    letter-spacing:0.03em;
+    font-feature-settings:"tnum";
+  }
+  .doc-name{
+    font-size:14px;
+    line-height:1.75;
+    color:var(--ink);
+    padding-top:4px;
+  }
+  .doc-required{
+    font-size:10.5px;
+    color:var(--slate-soft);
+    letter-spacing:0.06em;
+    display:block;
+    margin-top:5px;
+  }
+
+  .empty-note{
+    font-size:13.5px;
+    color:var(--slate);
+    line-height:1.9;
+    padding:18px 0;
+    border-top:1px solid var(--line);
+    margin-top:24px;
+  }
+
+  .pending-block{
+    border:1px solid var(--line);
+    border-left:3px solid var(--accent);
+    padding:22px 24px;
+    margin:24px 0 8px;
+    background:#FBFAF8;
+  }
+  .pending-block p{
+    font-size:14px;
+    line-height:1.9;
+    color:var(--ink);
+    margin:0;
+  }
+
+  .restart-row{
+    margin-top:32px;
+    padding-top:22px;
+    border-top:1px solid var(--line);
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:16px;
+    flex-wrap:wrap;
+  }
+  .result-note{
+    font-size:12px;
+    color:var(--slate-soft);
+    line-height:1.8;
+    max-width:360px;
+  }
+
+  .btn-primary{
+    background:var(--ink);
+    color:#fff;
+    border:1px solid var(--ink);
+    font-family:inherit;
+    font-size:13.5px;
+    font-weight:600;
+    letter-spacing:0.04em;
+    padding:13px 26px;
+    cursor:pointer;
+    flex-shrink:0;
+  }
+  .btn-primary:hover{ background:#2A3458; }
+  .btn-primary:focus-visible{ outline:2px solid var(--accent); outline-offset:3px; }
+
+  /* ---------- Transition ---------- */
+  .step-panel{
+    animation:fadein 180ms ease;
+  }
+  @keyframes fadein{
+    from{ opacity:0; transform:translateY(4px); }
+    to{ opacity:1; transform:translateY(0); }
+  }
+
+  footer{
+    width:100%;
+    max-width:760px;
+    margin-top:28px;
+    font-size:11.5px;
+    color:var(--slate-soft);
+    display:flex;
+    justify-content:space-between;
+    letter-spacing:0.02em;
+  }
+</style>
+</head>
+<body>
+
+  <div class="letterhead">
+    <div class="brand">
+      <span class="mark" aria-hidden="true"></span>
+      <span class="brand-text">サイトマイスター 営業サポート</span>
+    </div>
+    <span class="ref">SALES-DOC GUIDE</span>
+  </div>
+
+  <header class="page-header">
+    <p class="eyebrow">契約書面 判定ツール</p>
+    <h1>新商材の契約、<br>どの書面が必要かを確認する</h1>
+    <p class="lede">主契約・オプション・キャッシュバックの選択にあわせて、ご準備が必要な契約申込書を自動で判定します。各項目に回答していくだけで、最終的に必要な書面一覧が表示されます。</p>
+  </header>
+
+  <nav class="trail" id="trail" aria-label="選択履歴"></nav>
+
+  <main class="card" id="card"></main>
+
+  <footer>
+    <span>iFLAG Co., Ltd. — 社内営業支援ツール</span>
+    <span id="footer-date"></span>
+  </footer>
+
+<script>
+(function(){
+  "use strict";
+
+  // ---------------------------------------------------------------
+  // 契約書面マスタ
+  // ---------------------------------------------------------------
+  var DOCS = {
+    "HP-01":   { name: "【全社共通】サイトマイスター 契約申込書_オプションなし" },
+    "HP-02":   { name: "【全社共通】サイトマイスター 契約申込書_オプションあり（多言語、訪日）" },
+    "HP-03":   { name: "【全社共通】サイトマイスター 契約申込書_オプションあり（多言語のみ）" },
+    "HP-04":   { name: "【全社共通】サイトマイスター 契約申込書_オプションあり（訪日のみ）" },
+    "HP-CB-01":{ name: "【全社共通】サイトマイスター複数年契約キャッシュバック申込書" },
+    "HP-DJ-01":{ name: "【全社共通】導入事例掲載プログラム申込書_5万円_5項目以上" },
+    "HP-DJ-02":{ name: "【全社共通】導入事例掲載プログラム申込書_10万円_10項目以上" },
+    "HP-DJ-03":{ name: "【全社共通】導入事例掲載プログラム申込書_15万円_15項目以上" },
+    "HP-DJ-04":{ name: "【全社共通】導入事例掲載プログラム申込書_20万円_20項目以上" }
+  };
+
+  // ---------------------------------------------------------------
+  // 状態
+  // ---------------------------------------------------------------
+  var path = {};          // 回答の記録
+  var history = [];       // 戻る用のステップ履歴
+  var current = "main";
+
+  var cardEl = document.getElementById("card");
+  var trailEl = document.getElementById("trail");
+
+  // ---------------------------------------------------------------
+  // ステップ定義
+  // 各ステップは render(path) -> { tag, question, sub, choices:[{label, sub, go, set}] }
+  // ---------------------------------------------------------------
+  var STEPS = {
+
+    main: function(){
+      return {
+        tag: "STEP 1 — 主契約",
+        question: "主契約のサービスを選択してください",
+        sub: "今回ご契約いただく商材の主契約サービスを選択してください。",
+        choices: [
+          { label: "サイトマイスター", go: "option", set: { mainContract: "サイトマイスター" } },
+          { label: "ホームページリメイクスタジオ", go: "remake_result", set: { mainContract: "ホームページリメイクスタジオ" } }
+        ]
+      };
+    },
+
+    remake_result: function(){
+      return { restart: true };
+    },
+
+    option: function(){
+      return {
+        tag: "STEP 2 — オプション",
+        question: "オプションのご契約はありますか？",
+        sub: "多言語対応・訪日コンテンツ作成などのオプションを含む契約かどうかを選択してください。",
+        choices: [
+          { label: "オプションなし", go: "cashback", set: { option: "なし" } },
+          { label: "オプションあり", sub: "多言語対応・訪日コンテンツ作成のいずれかを含む契約", go: "option_type", set: { option: "あり" } }
+        ]
+      };
+    },
+
+    option_type: function(){
+      return {
+        tag: "STEP 2 — オプション内容",
+        question: "ご利用いただくオプションを選択してください",
+        sub: "対象となるオプションの組み合わせを選択してください。",
+        choices: [
+          { label: "多言語対応のみ", go: "cashback", set: { optionType: "多言語のみ" } },
+          { label: "訪日コンテンツ作成のみ", go: "cashback", set: { optionType: "訪日のみ" } },
+          { label: "多言語対応・訪日コンテンツ作成 両方", go: "cashback", set: { optionType: "両方" } }
+        ]
+      };
+    },
+
+    cashback: function(){
+      return {
+        tag: "STEP 3 — キャッシュバック",
+        question: "キャッシュバックのご契約はありますか？",
+        sub: "複数年契約キャッシュバック、または導入事例掲載プログラムをご利用の場合は「する」を選択してください。",
+        choices: [
+          { label: "キャッシュバックしない", go: "result", set: { cashback: "しない" } },
+          { label: "キャッシュバックする", go: "cashback_type", set: { cashback: "する" } }
+        ]
+      };
+    },
+
+    cashback_type: function(){
+      return {
+        tag: "STEP 3 — キャッシュバック内容",
+        question: "キャッシュバックの種類を選択してください",
+        sub: "対象となるキャッシュバックの組み合わせを選択してください。",
+        choices: [
+          { label: "複数年契約キャッシュバックのみ", go: "result", set: { cashbackType: "複数年のみ" } },
+          { label: "導入事例掲載プログラムのみ", go: "amount", set: { cashbackType: "導入事例のみ" } },
+          { label: "複数年契約・導入事例掲載 両方", go: "amount", set: { cashbackType: "両方" } }
+        ]
+      };
+    },
+
+    amount: function(){
+      return {
+        tag: "STEP 3 — 導入事例 希望金額",
+        question: "導入事例掲載プログラムの希望金額を選択してください",
+        sub: "希望するキャッシュバック金額に応じて、掲載項目数の条件が変わります。",
+        choices: [
+          { label: "5万円", sub: "掲載項目数 5項目以上", go: "result", set: { amount: "5" } },
+          { label: "10万円", sub: "掲載項目数 10項目以上", go: "result", set: { amount: "10" } },
+          { label: "15万円", sub: "掲載項目数 15項目以上", go: "result", set: { amount: "15" } },
+          { label: "20万円", sub: "掲載項目数 20項目以上", go: "result", set: { amount: "20" } }
+        ]
+      };
+    },
+
+    result: function(){
+      return { result: true };
+    }
+  };
+
+  // ---------------------------------------------------------------
+  // 必要書面の判定ロジック
+  // ---------------------------------------------------------------
+  function computeDocs(p){
+    var codes = [];
+
+    // 主契約・オプション
+    if (p.option === "なし"){
+      codes.push("HP-01");
+    } else if (p.option === "あり"){
+      codes.push("HP-01");
+      if (p.optionType === "両方") codes.push("HP-02");
+      else if (p.optionType === "多言語のみ") codes.push("HP-03");
+      else if (p.optionType === "訪日のみ") codes.push("HP-04");
+    }
+
+    // キャッシュバック
+    if (p.cashback === "する"){
+      if (p.cashbackType === "複数年のみ"){
+        codes.push("HP-CB-01");
+      } else if (p.cashbackType === "導入事例のみ"){
+        codes.push(amountToDJ(p.amount));
+      } else if (p.cashbackType === "両方"){
+        codes.push("HP-CB-01");
+        codes.push(amountToDJ(p.amount));
+      }
+    }
+
+    return codes;
+  }
+
+  function amountToDJ(amount){
+    var map = { "5": "HP-DJ-01", "10": "HP-DJ-02", "15": "HP-DJ-03", "20": "HP-DJ-04" };
+    return map[amount];
+  }
+
+  // ---------------------------------------------------------------
+  // 選択トレイル（画面上部のパンくず）
+  // ---------------------------------------------------------------
+  var TRAIL_LABELS = {
+    mainContract: function(v){ return v; },
+    option: function(v){ return "オプション" + v; },
+    optionType: function(v){ return v; },
+    cashback: function(v){ return "CB" + v; },
+    cashbackType: function(v){ return v; },
+    amount: function(v){ return v + "万円"; }
+  };
+  var TRAIL_ORDER = ["mainContract","option","optionType","cashback","cashbackType","amount"];
+
+  function renderTrail(){
+    trailEl.innerHTML = "";
+    var shown = 0;
+    TRAIL_ORDER.forEach(function(key){
+      if (path[key] === undefined) return;
+      if (shown > 0){
+        var arrow = document.createElement("span");
+        arrow.className = "trail-arrow";
+        arrow.textContent = "›";
+        trailEl.appendChild(arrow);
+      }
+      var chip = document.createElement("span");
+      chip.className = "trail-chip";
+      var num = document.createElement("span");
+      num.className = "num";
+      num.textContent = String(shown + 1).padStart(2,"0");
+      chip.appendChild(num);
+      var text = document.createTextNode(TRAIL_LABELS[key](path[key]));
+      chip.appendChild(text);
+      trailEl.appendChild(chip);
+      shown++;
+    });
+  }
+
+  // ---------------------------------------------------------------
+  // 画面描画
+  // ---------------------------------------------------------------
+  function go(stepId, setValues, pushHistory){
+    if (pushHistory !== false){
+      history.push({ step: current, path: Object.assign({}, path) });
+    }
+    if (setValues){
+      Object.assign(path, setValues);
+    }
+    current = stepId;
+    render();
+  }
+
+  function back(){
+    if (history.length === 0) return;
+    var prev = history.pop();
+    current = prev.step;
+    path = prev.path;
+    render();
+  }
+
+  function restartAll(){
+    path = {};
+    history = [];
+    current = "main";
+    render();
+  }
+
+  function render(){
+    renderTrail();
+    var def = STEPS[current]();
+    cardEl.innerHTML = "";
+    cardEl.classList.remove("step-panel");
+
+    var panel = document.createElement("div");
+    panel.className = "step-panel";
+
+    if (def.restart){
+      renderPendingResult(panel);
+    } else if (def.result){
+      renderResult(panel);
+    } else {
+      renderQuestion(panel, def);
+    }
+
+    cardEl.appendChild(panel);
+  }
+
+  function renderQuestion(panel, def){
+    if (history.length > 0){
+      var backBtn = document.createElement("button");
+      backBtn.className = "back-link";
+      backBtn.type = "button";
+      backBtn.innerHTML = "&larr; 前の項目に戻る";
+      backBtn.addEventListener("click", back);
+      panel.appendChild(backBtn);
+    }
+
+    var tag = document.createElement("p");
+    tag.className = "step-tag";
+    tag.textContent = def.tag;
+    panel.appendChild(tag);
+
+    var h2 = document.createElement("h2");
+    h2.className = "question";
+    h2.textContent = def.question;
+    panel.appendChild(h2);
+
+    if (def.sub){
+      var sub = document.createElement("p");
+      sub.className = "question-sub";
+      sub.textContent = def.sub;
+      panel.appendChild(sub);
+    }
+
+    var choicesWrap = document.createElement("div");
+    choicesWrap.className = "choices";
+
+    def.choices.forEach(function(choice){
+      var btn = document.createElement("button");
+      btn.className = "choice-btn";
+      btn.type = "button";
+
+      var labelWrap = document.createElement("span");
+      var main = document.createElement("span");
+      main.className = "label-main";
+      main.textContent = choice.label;
+      labelWrap.appendChild(main);
+
+      if (choice.sub){
+        var subSpan = document.createElement("span");
+        subSpan.className = "label-sub";
+        subSpan.textContent = choice.sub;
+        labelWrap.appendChild(subSpan);
+      }
+
+      var arrow = document.createElement("span");
+      arrow.className = "arrow";
+      arrow.textContent = "→";
+
+      btn.appendChild(labelWrap);
+      btn.appendChild(arrow);
+
+      btn.addEventListener("click", function(){
+        go(choice.go, choice.set);
+      });
+
+      choicesWrap.appendChild(btn);
+    });
+
+    panel.appendChild(choicesWrap);
+  }
+
+  function renderPendingResult(panel){
+    var backBtn = document.createElement("button");
+    backBtn.className = "back-link";
+    backBtn.type = "button";
+    backBtn.innerHTML = "&larr; 前の項目に戻る";
+    backBtn.addEventListener("click", back);
+    panel.appendChild(backBtn);
+
+    var status = document.createElement("span");
+    status.className = "result-status";
+    status.textContent = "判定結果";
+    panel.appendChild(status);
+
+    var h2 = document.createElement("h2");
+    h2.className = "question";
+    h2.textContent = "契約書準備中です";
+    panel.appendChild(h2);
+
+    var block = document.createElement("div");
+    block.className = "pending-block";
+    var p = document.createElement("p");
+    p.textContent = "ホームページリメイクスタジオの契約申込書は、現在準備中です。整備が完了するまで今しばらくお待ちください。サイトマイスターの契約については、引き続きこのツールで書面を判定できます。";
+    block.appendChild(p);
+    panel.appendChild(block);
+
+    appendRestartRow(panel, "ホームページリメイクスタジオの書面は準備が整い次第、追ってご案内します。");
+  }
+
+  function renderResult(panel){
+    var backBtn = document.createElement("button");
+    backBtn.className = "back-link";
+    backBtn.type = "button";
+    backBtn.innerHTML = "&larr; 前の項目に戻る";
+    backBtn.addEventListener("click", back);
+    panel.appendChild(backBtn);
+
+    var status = document.createElement("span");
+    status.className = "result-status";
+    status.textContent = "判定結果";
+    panel.appendChild(status);
+
+    var h2 = document.createElement("h2");
+    h2.className = "question";
+    h2.textContent = "必要な契約書面";
+    panel.appendChild(h2);
+
+    var sub = document.createElement("p");
+    sub.className = "question-sub";
+    sub.textContent = "選択内容にもとづき、以下の書面をご準備ください。";
+    panel.appendChild(sub);
+
+    var codes = computeDocs(path);
+
+    if (codes.length === 0){
+      var note = document.createElement("p");
+      note.className = "empty-note";
+      note.textContent = "追加の契約書面は不要です。主契約・オプションの選択内容をご確認のうえ、通常の手続きを進めてください。";
+      panel.appendChild(note);
+    } else {
+      var list = document.createElement("div");
+      list.className = "doc-list";
+      codes.forEach(function(code){
+        var item = document.createElement("div");
+        item.className = "doc-item";
+
+        var tab = document.createElement("div");
+        tab.className = "doc-tab";
+        tab.textContent = code;
+
+        var nameWrap = document.createElement("div");
+        var name = document.createElement("div");
+        name.className = "doc-name";
+        name.textContent = DOCS[code].name;
+        nameWrap.appendChild(name);
+
+        var req = document.createElement("span");
+        req.className = "doc-required";
+        req.textContent = "必須";
+        nameWrap.appendChild(req);
+
+        item.appendChild(tab);
+        item.appendChild(nameWrap);
+        list.appendChild(item);
+      });
+      panel.appendChild(list);
+    }
+
+    appendRestartRow(panel, "選択内容を変更する場合は、最初からやり直してください。");
+  }
+
+  function appendRestartRow(panel, noteText){
+    var row = document.createElement("div");
+    row.className = "restart-row";
+
+    var note = document.createElement("p");
+    note.className = "result-note";
+    note.textContent = noteText;
+
+    var btn = document.createElement("button");
+    btn.className = "btn-primary";
+    btn.type = "button";
+    btn.textContent = "最初からやり直す";
+    btn.addEventListener("click", restartAll);
+
+    row.appendChild(note);
+    row.appendChild(btn);
+    panel.appendChild(row);
+  }
+
+  // ---------------------------------------------------------------
+  // 初期化
+  // ---------------------------------------------------------------
+  var today = new Date();
+  document.getElementById("footer-date").textContent =
+    today.getFullYear() + "." + String(today.getMonth()+1).padStart(2,"0") + "." + String(today.getDate()).padStart(2,"0");
+
+  render();
+})();
+</script>
+</body>
+</html>
