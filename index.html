@@ -773,11 +773,11 @@
   function computeDocs(p){
     var codes = [];
 
-    // 主契約・オプション
+    // 主契約・オプション（オプションあり/なしは排他関係。オプションありの場合、
+    // HP-01「オプションなし」は不要で、HP-02〜04のいずれか1つのみが必要）
     if (p.option === "なし"){
       codes.push("HP-01");
     } else if (p.option === "あり"){
-      codes.push("HP-01");
       if (p.optionType === "両方") codes.push("HP-02");
       else if (p.optionType === "多言語のみ") codes.push("HP-03");
       else if (p.optionType === "訪日のみ") codes.push("HP-04");
