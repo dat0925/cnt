@@ -536,12 +536,13 @@
     flex-wrap:wrap;
   }
   .gate-input{
-    width:140px;
-    padding:13px 14px;
+    flex:1 1 200px;
+    min-width:0;
+    padding:13px 16px;
     font-family:inherit;
-    font-size:24px;
-    text-align:center;
-    letter-spacing:0.5em;
+    font-size:15px;
+    text-align:left;
+    letter-spacing:normal;
     color:var(--ink);
     border:1px solid var(--line);
     background:var(--surface);
@@ -588,18 +589,15 @@
     <span class="mark" aria-hidden="true"></span>
     <p class="eyebrow">アクセス制限</p>
     <h1 class="gate-title">認証コードを入力してください</h1>
-    <p class="gate-lede">このページは社内限定の営業支援ツールです。お手元の4桁の認証コードを入力してください。</p>
+    <p class="gate-lede">このページは社内限定の営業支援ツールです。認証コードを入力してください。</p>
     <form id="gate-form" class="gate-form" autocomplete="off">
       <input
         id="gate-input"
         class="gate-input"
         type="password"
-        inputmode="numeric"
-        pattern="[0-9]*"
-        maxlength="4"
         autocomplete="off"
-        placeholder="••••"
-        aria-label="4桁の認証コード">
+        placeholder="認証コードを入力"
+        aria-label="認証コード">
       <button type="submit" class="btn-primary gate-submit">認証する</button>
     </form>
     <p id="gate-error" class="gate-error" style="display:none;" role="alert">認証コードが正しくありません。もう一度ご確認ください。</p>
