@@ -1114,7 +1114,20 @@
   // 厳格なアクセス制御ではない点にご留意ください。
   // ---------------------------------------------------------------
   var GATE_KEY = "cnt_sitemaster_access_v1";
-  var GATE_CODE = "2759";
+  // SHA-256("2759") — 平文の認証コードをソース上に残さないためハッシュ値で保持
+  var GATE_CODE_HASH = "1aa219431528a059b7f0d8ec0c7d2a6dcc0f0f659a642adc4fc1ebbd907bf983";
+
+  function sha256Hex(text){
+    var data = new TextEncoder().encode(text);
+    return crypto.subtle.digest("SHA-256", data).then(function(buf){
+      var bytes = new Uint8Array(buf);
+      var hex = "";
+      for (var i = 0; i < bytes.length; i++){
+        hex += bytes[i].toString(16).padStart(2, "0");
+      }
+      return hex;
+    });
+  }
 
   var gateScreen = document.getElementById("gate-screen");
   var appContent = document.getElementById("app-content");
@@ -1150,15 +1163,23 @@
 
   gateForm.addEventListener("submit", function(e){
     e.preventDefault();
-    if (gateInput.value === GATE_CODE){
-      gateError.style.display = "none";
-      grantAccess();
-      showApp();
-    } else {
+    var value = gateInput.value;
+
+    sha256Hex(value).then(function(hash){
+      if (hash === GATE_CODE_HASH){
+        gateError.style.display = "none";
+        grantAccess();
+        showApp();
+      } else {
+        gateError.style.display = "block";
+        gateInput.value = "";
+        gateInput.focus();
+      }
+    }).catch(function(){
+      // crypto.subtle が利用できない環境（非HTTPS等）向けのフォールバック表示
+      gateError.textContent = "この端末では認証処理を実行できません。HTTPS接続でアクセスしているかご確認ください。";
       gateError.style.display = "block";
-      gateInput.value = "";
-      gateInput.focus();
-    }
+    });
   });
 
   if (hasAccess()){
