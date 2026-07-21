@@ -284,6 +284,20 @@
     gap:16px;
     transition:border-color 120ms ease, background 120ms ease, padding-left 120ms ease;
   }
+  .choice-group-label{
+    font-size:11px;
+    letter-spacing:0.12em;
+    color:var(--slate-soft);
+    font-weight:700;
+    margin:0;
+    padding:14px 0 2px;
+  }
+  .choice-group-label:first-child{ padding-top:0; }
+  .choice-group-label:not(:first-child){
+    border-top:1px solid var(--line);
+    margin-top:4px;
+  }
+
   .choice-btn .label-main{ line-height:1.6; }
   .choice-btn .label-sub{
     display:block;
@@ -659,11 +673,22 @@
     "HP-02":   { name: "【全社共通】サイトマイスター 契約申込書_オプションあり（多言語、訪日）" },
     "HP-03":   { name: "【全社共通】サイトマイスター 契約申込書_オプションあり（多言語のみ）" },
     "HP-04":   { name: "【全社共通】サイトマイスター 契約申込書_オプションあり（訪日のみ）" },
-    "HP-CB-01":{ name: "【全社共通】サイトマイスター複数年契約キャッシュバック申込書" },
+    "HP-CB-01":{ name: "【全社共通】サイトマイスター複数年契約キャッシュバック申込書_2年10万円" },
+    "HP-CB-02":{ name: "【全社共通】サイトマイスター複数年契約キャッシュバック申込書_2年15万円" },
+    "HP-CB-03":{ name: "【全社共通】サイトマイスター複数年契約キャッシュバック申込書_3年15万円" },
+    "HP-CB-04":{ name: "【全社共通】サイトマイスター複数年契約キャッシュバック申込書_3年20万円" },
     "HP-DJ-01":{ name: "【全社共通】導入事例掲載プログラム申込書_5万円_5項目以上" },
     "HP-DJ-02":{ name: "【全社共通】導入事例掲載プログラム申込書_10万円_10項目以上" },
     "HP-DJ-03":{ name: "【全社共通】導入事例掲載プログラム申込書_15万円_15項目以上" },
     "HP-DJ-04":{ name: "【全社共通】導入事例掲載プログラム申込書_20万円_20項目以上" }
+  };
+
+  // 複数年契約キャッシュバックのプラン一覧（契約年数 × ベーシック/プレミアム）
+  var CB_PLANS = {
+    "01": { years: "2年契約", tier: "ベーシックプラン", amount: "10" },
+    "02": { years: "2年契約", tier: "プレミアムプラン", amount: "15" },
+    "03": { years: "3年契約", tier: "ベーシックプラン", amount: "15" },
+    "04": { years: "3年契約", tier: "プレミアムプラン", amount: "20" }
   };
 
   // ---------------------------------------------------------------
@@ -741,9 +766,34 @@
         question: "キャッシュバックの種類を選択してください",
         sub: "対象となるキャッシュバックの組み合わせを選択してください。",
         choices: [
-          { label: "複数年契約キャッシュバックのみ", go: "result", set: { cashbackType: "複数年のみ" } },
+          { label: "複数年契約キャッシュバックのみ", go: "cb_plan", set: { cashbackType: "複数年のみ" } },
           { label: "導入事例掲載プログラムのみ", go: "amount", set: { cashbackType: "導入事例のみ" } },
-          { label: "複数年契約・導入事例掲載 両方", go: "amount", set: { cashbackType: "両方" } }
+          { label: "複数年契約・導入事例掲載 両方", go: "cb_plan", set: { cashbackType: "両方" } }
+        ]
+      };
+    },
+
+    cb_plan: function(){
+      var next = (path.cashbackType === "両方") ? "amount" : "result";
+      return {
+        tag: "STEP 3 — 複数年契約キャッシュバック",
+        question: "複数年契約キャッシュバックのプランを選択してください",
+        sub: "契約年数とプラン（キャッシュバック金額）の組み合わせを選択してください。15万円のプランは2年・3年の両方にあるため、契約年数とあわせてご確認ください。",
+        groups: [
+          {
+            label: "2年契約",
+            choices: [
+              { label: "ベーシックプラン", sub: "キャッシュバック 10万円", go: next, set: { cbPlan: "01" } },
+              { label: "プレミアムプラン", sub: "キャッシュバック 15万円", go: next, set: { cbPlan: "02" } }
+            ]
+          },
+          {
+            label: "3年契約",
+            choices: [
+              { label: "ベーシックプラン", sub: "キャッシュバック 15万円", go: next, set: { cbPlan: "03" } },
+              { label: "プレミアムプラン", sub: "キャッシュバック 20万円", go: next, set: { cbPlan: "04" } }
+            ]
+          }
         ]
       };
     },
@@ -786,11 +836,11 @@
     // キャッシュバック
     if (p.cashback === "する"){
       if (p.cashbackType === "複数年のみ"){
-        codes.push("HP-CB-01");
+        codes.push("HP-CB-" + p.cbPlan);
       } else if (p.cashbackType === "導入事例のみ"){
         codes.push(amountToDJ(p.amount));
       } else if (p.cashbackType === "両方"){
-        codes.push("HP-CB-01");
+        codes.push("HP-CB-" + p.cbPlan);
         codes.push(amountToDJ(p.amount));
       }
     }
@@ -812,9 +862,10 @@
     optionType: function(v){ return v; },
     cashback: function(v){ return "CB" + v; },
     cashbackType: function(v){ return v; },
+    cbPlan: function(v){ var p = CB_PLANS[v]; return p.years + "・" + p.amount + "万円"; },
     amount: function(v){ return v + "万円"; }
   };
-  var TRAIL_ORDER = ["mainContract","option","optionType","cashback","cashbackType","amount"];
+  var TRAIL_ORDER = ["mainContract","option","optionType","cashback","cashbackType","cbPlan","amount"];
 
   function renderTrail(){
     trailEl.innerHTML = "";
@@ -922,7 +973,7 @@
     var choicesWrap = document.createElement("div");
     choicesWrap.className = "choices";
 
-    def.choices.forEach(function(choice){
+    function buildChoiceBtn(choice){
       var btn = document.createElement("button");
       btn.className = "choice-btn";
       btn.type = "button";
@@ -951,8 +1002,25 @@
         go(choice.go, choice.set);
       });
 
-      choicesWrap.appendChild(btn);
-    });
+      return btn;
+    }
+
+    if (def.groups){
+      def.groups.forEach(function(group){
+        var groupLabel = document.createElement("p");
+        groupLabel.className = "choice-group-label";
+        groupLabel.textContent = group.label;
+        choicesWrap.appendChild(groupLabel);
+
+        group.choices.forEach(function(choice){
+          choicesWrap.appendChild(buildChoiceBtn(choice));
+        });
+      });
+    } else {
+      def.choices.forEach(function(choice){
+        choicesWrap.appendChild(buildChoiceBtn(choice));
+      });
+    }
 
     panel.appendChild(choicesWrap);
   }
