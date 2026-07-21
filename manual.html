@@ -1,0 +1,1243 @@
+<title>契約書面 判定ツール｜操作マニュアル</title>
+<style>
+  :root{
+    --paper:#F6F5F1;
+    --ink:#1A2238;
+    --surface:#FFFFFF;
+    --line:#DCD7C9;
+    --accent:#8C2F39;
+    --accent-soft:rgba(140,47,57,0.10);
+    --slate:#5B5F6B;
+    --slate-soft:#8A8D96;
+    --new-badge:#5B7B5A;
+    --new-badge-soft:rgba(91,123,90,0.12);
+    --sans:"Yu Gothic","YuGothic","Hiragino Kaku Gothic ProN","Noto Sans JP","Meiryo",sans-serif;
+    --serif:"Yu Mincho","YuMincho","Hiragino Mincho ProN","Noto Serif JP",serif;
+    --mono:ui-monospace,"SFMono-Regular",Consolas,"Liberation Mono",monospace;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --paper:#15161F;
+      --ink:#EAE6DC;
+      --surface:#1D2030;
+      --line:rgba(255,255,255,0.14);
+      --accent:#E08A93;
+      --accent-soft:rgba(224,138,147,0.14);
+      --slate:#B9B7C6;
+      --slate-soft:#8D8CA0;
+      --new-badge:#8FC08D;
+      --new-badge-soft:rgba(143,192,141,0.14);
+    }
+  }
+  :root[data-theme="dark"]{
+    --paper:#15161F;
+    --ink:#EAE6DC;
+    --surface:#1D2030;
+    --line:rgba(255,255,255,0.14);
+    --accent:#E08A93;
+    --accent-soft:rgba(224,138,147,0.14);
+    --slate:#B9B7C6;
+    --slate-soft:#8D8CA0;
+    --new-badge:#8FC08D;
+    --new-badge-soft:rgba(143,192,141,0.14);
+  }
+  :root[data-theme="light"]{
+    --paper:#F6F5F1;
+    --ink:#1A2238;
+    --surface:#FFFFFF;
+    --line:#DCD7C9;
+    --accent:#8C2F39;
+    --accent-soft:rgba(140,47,57,0.10);
+    --slate:#5B5F6B;
+    --slate-soft:#8A8D96;
+    --new-badge:#5B7B5A;
+    --new-badge-soft:rgba(91,123,90,0.12);
+  }
+
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; padding:0; }
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:var(--sans);
+    -webkit-font-smoothing:antialiased;
+    line-height:1.75;
+  }
+  @media (prefers-reduced-motion: reduce){
+    *{ scroll-behavior:auto !important; animation-duration:0.001ms !important; transition-duration:0.001ms !important; }
+  }
+  a{ color:var(--accent); }
+  h1,h2,h3{ text-wrap:balance; font-weight:700; }
+
+  .skip-link{
+    position:absolute; left:-9999px; top:0;
+    background:var(--ink); color:var(--paper); padding:10px 16px; z-index:100;
+  }
+  .skip-link:focus{ left:12px; top:12px; }
+
+  /* ---------- Page grid ---------- */
+  .page{
+    max-width:1180px;
+    margin:0 auto;
+    padding:0 24px 100px;
+    display:grid;
+    grid-template-columns:230px minmax(0,1fr);
+    gap:56px;
+    align-items:start;
+  }
+  @media (max-width:880px){
+    .page{ grid-template-columns:1fr; gap:0; padding:0 16px 72px; }
+  }
+
+  /* ---------- Cover ---------- */
+  .cover{
+    grid-column:1 / -1;
+    padding:56px 0 40px;
+    border-bottom:1px solid var(--line);
+    margin-bottom:8px;
+  }
+  .cover-eyebrow{
+    font-family:var(--mono);
+    font-size:11.5px;
+    letter-spacing:0.16em;
+    color:var(--accent);
+    font-weight:600;
+    margin:0 0 16px;
+    text-transform:uppercase;
+  }
+  .cover h1{
+    font-family:var(--serif);
+    font-size:clamp(28px,4.2vw,42px);
+    line-height:1.45;
+    margin:0 0 18px;
+    letter-spacing:0.01em;
+    max-width:16ch;
+  }
+  .cover-lede{
+    font-size:15px;
+    color:var(--slate);
+    max-width:56ch;
+    margin:0 0 28px;
+  }
+  .cover-meta{
+    display:flex;
+    flex-wrap:wrap;
+    gap:28px 44px;
+    margin:0;
+    padding-top:22px;
+    border-top:1px solid var(--line);
+  }
+  .cover-meta div{ min-width:120px; }
+  .cover-meta dt{
+    font-size:10.5px;
+    letter-spacing:0.12em;
+    color:var(--slate-soft);
+    font-weight:600;
+    margin-bottom:5px;
+    text-transform:uppercase;
+  }
+  .cover-meta dd{
+    margin:0;
+    font-size:14px;
+    font-weight:600;
+    font-feature-settings:"tnum";
+  }
+  .cover-meta a{ text-decoration:none; border-bottom:1px solid currentColor; }
+
+  /* ---------- Sidebar (tab index) ---------- */
+  .sidebar{
+    position:sticky;
+    top:24px;
+    align-self:start;
+    max-height:calc(100vh - 48px);
+    overflow-y:auto;
+    padding-right:4px;
+  }
+  .sidebar-group{ margin-bottom:22px; }
+  .sidebar-group-label{
+    font-size:10.5px;
+    letter-spacing:0.14em;
+    color:var(--slate-soft);
+    font-weight:700;
+    text-transform:uppercase;
+    margin:0 0 10px;
+    padding-left:14px;
+  }
+  .sidebar ul{ list-style:none; margin:0; padding:0; }
+  .sidebar a{
+    display:block;
+    font-size:13px;
+    color:var(--slate);
+    text-decoration:none;
+    padding:7px 14px;
+    border-left:2px solid transparent;
+    line-height:1.5;
+  }
+  .sidebar a:hover{ color:var(--ink); border-left-color:var(--line); }
+  .sidebar a.is-active{
+    color:var(--ink);
+    font-weight:700;
+    border-left-color:var(--accent);
+    background:var(--accent-soft);
+  }
+  .sidebar a:focus-visible{ outline:2px solid var(--accent); outline-offset:-2px; }
+
+  @media (max-width:880px){
+    .sidebar{
+      position:sticky; top:0; z-index:20;
+      max-height:none;
+      background:var(--paper);
+      border-bottom:1px solid var(--line);
+      margin:0 -16px 28px;
+      padding:12px 16px;
+      overflow-x:auto;
+      overflow-y:visible;
+    }
+    .sidebar-group{ display:inline-flex; align-items:center; gap:2px; margin:0 18px 0 0; }
+    .sidebar-group-label{ display:none; }
+    .sidebar ul{ display:flex; gap:2px; }
+    .sidebar a{ white-space:nowrap; border-left:none; border-bottom:2px solid transparent; padding:6px 10px; }
+    .sidebar a.is-active{ border-left-color:transparent; border-bottom-color:var(--accent); background:none; }
+  }
+
+  /* ---------- Main content ---------- */
+  main{ min-width:0; }
+  section{ scroll-margin-top:20px; }
+  .doc-section{
+    background:var(--surface);
+    border:1px solid var(--line);
+    border-top:3px solid var(--ink);
+    padding:36px 40px 40px;
+    margin-bottom:28px;
+  }
+  @media (max-width:600px){
+    .doc-section{ padding:26px 20px 30px; }
+  }
+  .sec-tag{
+    font-family:var(--mono);
+    font-size:11px;
+    letter-spacing:0.1em;
+    color:var(--slate-soft);
+    font-weight:600;
+    margin:0 0 12px;
+    display:flex;
+    align-items:center;
+    gap:10px;
+    text-transform:uppercase;
+  }
+  .sec-tag .new-badge{
+    font-family:var(--sans);
+    font-size:10.5px;
+    letter-spacing:0.06em;
+    color:var(--new-badge);
+    background:var(--new-badge-soft);
+    padding:3px 9px;
+    font-weight:700;
+    text-transform:none;
+  }
+  .doc-section h2{
+    font-size:21px;
+    margin:0 0 14px;
+    line-height:1.55;
+  }
+  .doc-section > p.intro{
+    font-size:14.5px;
+    color:var(--slate);
+    max-width:62ch;
+    margin:0 0 26px;
+  }
+  .doc-section h3.sub-h{
+    font-size:14.5px;
+    font-weight:700;
+    margin:30px 0 12px;
+    padding-top:22px;
+    border-top:1px solid var(--line);
+  }
+  .doc-section h3.sub-h:first-of-type{ border-top:none; padding-top:0; margin-top:0; }
+  .doc-section p{ font-size:14.5px; color:var(--ink); max-width:62ch; }
+  .doc-section p.caption{
+    font-size:13px;
+    color:var(--slate);
+    max-width:62ch;
+    margin-top:14px;
+  }
+
+  .callout{
+    border-left:3px solid var(--accent);
+    background:var(--accent-soft);
+    padding:16px 20px;
+    font-size:13.5px;
+    color:var(--ink);
+    margin:18px 0;
+    max-width:62ch;
+  }
+  .callout strong{ color:var(--accent); }
+
+  /* ---------- Reference tables ---------- */
+  .ref-table-wrap{ overflow-x:auto; margin:16px 0 6px; }
+  table.ref-table{
+    border-collapse:collapse;
+    width:100%;
+    min-width:420px;
+    font-size:13.5px;
+  }
+  table.ref-table caption{
+    text-align:left;
+    font-size:11px;
+    letter-spacing:0.1em;
+    color:var(--slate-soft);
+    font-weight:700;
+    text-transform:uppercase;
+    margin-bottom:8px;
+  }
+  table.ref-table th, table.ref-table td{
+    border-bottom:1px solid var(--line);
+    padding:9px 14px 9px 0;
+    text-align:left;
+    vertical-align:top;
+  }
+  table.ref-table th{
+    font-size:11px;
+    letter-spacing:0.06em;
+    color:var(--slate-soft);
+    font-weight:700;
+    text-transform:uppercase;
+  }
+  table.ref-table td.code{
+    font-family:var(--mono);
+    font-feature-settings:"tnum";
+    color:var(--accent);
+    font-weight:600;
+    white-space:nowrap;
+  }
+
+  /* ---------- Mock frame (faithful UI reproduction, always light — a real screen) ---------- */
+  .mock-frame{
+    border:1px solid #DCD7C9;
+    background:#FFFFFF;
+    margin:20px 0;
+    box-shadow:0 1px 3px rgba(26,34,56,0.08);
+  }
+  .mock-chrome{
+    display:flex;
+    align-items:center;
+    gap:7px;
+    padding:9px 14px;
+    background:#ECE9E2;
+    border-bottom:1px solid #DCD7C9;
+  }
+  .mock-dot{ width:7px; height:7px; border-radius:50%; background:#D3CFC5; display:inline-block; }
+  .mock-dot.a{ background:#C7838A; }
+  .mock-url{
+    font-family:ui-monospace,"SFMono-Regular",Consolas,monospace;
+    font-size:11px;
+    color:#7B7566;
+    background:#FFFFFF;
+    border:1px solid #DCD7C9;
+    padding:3px 10px;
+    margin-left:8px;
+    flex:1 1 auto;
+    max-width:260px;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+  }
+  .mock-body{
+    padding:26px 28px 28px;
+    font-family:"Noto Sans JP","Hiragino Kaku Gothic ProN",sans-serif;
+    color:#1A2238;
+  }
+  .mock-trail{ display:flex; flex-wrap:wrap; gap:6px; margin-bottom:16px; }
+  .mock-trail span.chip{
+    font-size:10.5px; color:#5B5F6B; background:#FFFFFF; border:1px solid #DCD7C9;
+    padding:3px 9px; display:inline-flex; align-items:center;
+  }
+  .mock-trail span.arrow{ color:#8A8D96; font-size:11px; align-self:center; }
+  .mock-tag{
+    font-size:10.5px; letter-spacing:0.12em; color:#8A8D96; font-weight:700;
+    margin:0 0 10px; text-transform:uppercase;
+  }
+  .mock-q{ font-size:16.5px; font-weight:700; margin:0 0 8px; line-height:1.55; }
+  .mock-sub{ font-size:12.5px; color:#5B5F6B; line-height:1.8; margin:0 0 20px; max-width:46ch; }
+  .mock-choices{ display:flex; flex-direction:column; gap:8px; }
+  .mock-group-label{
+    font-size:10.5px; letter-spacing:0.1em; color:#8A8D96; font-weight:700;
+    padding:10px 0 2px; text-transform:uppercase;
+  }
+  .mock-group-label:first-child{ padding-top:0; }
+  .mock-group-label:not(:first-child){ border-top:1px solid #DCD7C9; margin-top:2px; }
+  .mock-choice{
+    display:flex; align-items:center; justify-content:space-between; gap:14px;
+    border:1px solid #DCD7C9; border-left:3px solid #DCD7C9;
+    padding:13px 16px; font-size:13.5px; font-weight:500;
+  }
+  .mock-choice .m-sub{ display:block; font-size:11px; color:#8A8D96; font-weight:400; margin-top:2px; }
+  .mock-choice .m-arrow{ color:#8A8D96; font-size:13px; flex-shrink:0; }
+  .mock-choice.is-pick{
+    border-color:#1A2238; border-left-color:#8C2F39; background:#FBFAF8;
+  }
+  .mock-choice.is-pick .m-arrow{ color:#8C2F39; }
+  .mock-pick-flag{
+    font-family:ui-monospace,SFMono-Regular,Consolas,monospace;
+    font-size:10.5px; color:#8C2F39; font-weight:700; letter-spacing:0.04em;
+    margin-left:10px; white-space:nowrap;
+  }
+
+  .mock-status{
+    display:inline-flex; font-size:10.5px; letter-spacing:0.06em; font-weight:700;
+    color:#8C2F39; border:1px solid #8C2F39; padding:3px 10px; margin-bottom:14px;
+  }
+  .mock-doclist{ display:flex; flex-direction:column; gap:8px; margin:16px 0 4px; border-top:1px solid #DCD7C9; padding-top:12px; }
+  .mock-docitem{ display:flex; align-items:flex-start; gap:14px; padding:14px 16px; background:#FBF8F4; border:1px solid #DCD7C9; border-left:3px solid #8C2F39; }
+  .mock-doctab{ flex-shrink:0; width:64px; text-align:center; padding:5px 3px; background:#8C2F39; color:#fff; font-size:10px; font-weight:700; font-family:ui-monospace,monospace; }
+  .mock-docname{ font-size:13px; font-weight:600; line-height:1.6; }
+  .mock-docreq{ font-size:9px; font-weight:700; color:#8C2F39; background:rgba(140,47,57,0.09); letter-spacing:0.05em; display:inline-block; padding:2px 7px; margin-top:6px; }
+  .mock-cta-row{ display:flex; flex-wrap:wrap; gap:10px; margin-top:18px; padding-top:18px; border-top:1px solid #DCD7C9; }
+  .mock-cta{ flex:1 1 180px; padding:12px 15px; font-size:12.5px; font-weight:600; border:1px solid #1A2238; display:flex; align-items:center; justify-content:space-between; }
+  .mock-cta.primary{ background:#1A2238; color:#fff; }
+  .mock-cta.secondary{ background:#fff; color:#1A2238; border-left:3px solid #8C2F39; }
+
+  .mock-backlink{
+    display:inline-flex; align-items:center; gap:6px; font-size:11.5px; font-weight:600; color:#5B5F6B;
+    background:#fff; border:1px solid #DCD7C9; padding:7px 14px; margin-bottom:18px;
+  }
+  .mock-restart-row{ display:flex; align-items:center; justify-content:space-between; gap:14px; flex-wrap:wrap; margin-top:20px; padding-top:16px; border-top:1px solid #DCD7C9; }
+  .mock-restart-note{ font-size:11px; color:#8A8D96; max-width:280px; }
+  .mock-btn-primary{ background:#1A2238; color:#fff; border:1px solid #1A2238; font-size:12px; font-weight:600; padding:10px 20px; flex-shrink:0; }
+
+  .mock-pending{ border:1px solid #DCD7C9; border-left:3px solid #8C2F39; padding:16px 18px; background:#FBFAF8; font-size:12.5px; line-height:1.8; }
+
+  /* ---------- Interactive demo (functional, reuses same visual language) ---------- */
+  .demo-note{
+    display:flex; align-items:center; gap:8px;
+    font-size:12px; color:var(--slate); background:var(--accent-soft);
+    border:1px solid var(--line); padding:10px 14px; margin-bottom:16px;
+  }
+  .demo-frame{ border:1px solid #DCD7C9; background:#FFFFFF; box-shadow:0 1px 3px rgba(26,34,56,0.08); }
+  .demo-body{ padding:26px 28px 28px; font-family:"Noto Sans JP","Hiragino Kaku Gothic ProN",sans-serif; color:#1A2238; min-height:260px; }
+  .demo-trail{ display:flex; flex-wrap:wrap; gap:6px; margin-bottom:16px; min-height:20px; }
+  .demo-trail .chip{ font-size:10.5px; color:#5B5F6B; background:#FFFFFF; border:1px solid #DCD7C9; padding:3px 9px; }
+  .demo-trail .arrow{ color:#8A8D96; font-size:11px; align-self:center; }
+  .demo-tag{ font-size:10.5px; letter-spacing:0.12em; color:#8A8D96; font-weight:700; margin:0 0 10px; text-transform:uppercase; }
+  .demo-q{ font-size:16.5px; font-weight:700; margin:0 0 8px; }
+  .demo-sub{ font-size:12.5px; color:#5B5F6B; line-height:1.8; margin:0 0 20px; max-width:46ch; }
+  .demo-choices{ display:flex; flex-direction:column; gap:8px; }
+  .demo-group-label{ font-size:10.5px; letter-spacing:0.1em; color:#8A8D96; font-weight:700; padding:10px 0 2px; text-transform:uppercase; }
+  .demo-group-label:first-child{ padding-top:0; }
+  .demo-group-label:not(:first-child){ border-top:1px solid #DCD7C9; margin-top:2px; }
+  .demo-choice-btn{
+    text-align:left; width:100%; background:#fff; border:1px solid #DCD7C9; border-left:3px solid #DCD7C9;
+    padding:13px 16px; font-family:inherit; font-size:13.5px; font-weight:500; color:#1A2238; cursor:pointer;
+    display:flex; align-items:center; justify-content:space-between; gap:14px;
+    transition:border-color 120ms ease, background 120ms ease;
+  }
+  .demo-choice-btn .sub{ display:block; font-size:11px; color:#8A8D96; font-weight:400; margin-top:2px; }
+  .demo-choice-btn .arrow{ color:#8A8D96; font-size:13px; flex-shrink:0; transition:transform 120ms ease; }
+  .demo-choice-btn:hover{ border-color:#1A2238; border-left-color:#8C2F39; background:#FBFAF8; }
+  .demo-choice-btn:hover .arrow{ transform:translateX(3px); color:#8C2F39; }
+  .demo-choice-btn:focus-visible{ outline:2px solid #8C2F39; outline-offset:2px; }
+  .demo-back{
+    display:inline-flex; align-items:center; gap:6px; font-family:inherit; font-size:11.5px; font-weight:600; color:#5B5F6B;
+    background:#fff; border:1px solid #DCD7C9; cursor:pointer; padding:7px 14px; margin-bottom:18px;
+  }
+  .demo-back:hover{ color:#1A2238; border-color:#1A2238; }
+  .demo-status{ display:inline-flex; font-size:10.5px; letter-spacing:0.06em; font-weight:700; color:#8C2F39; border:1px solid #8C2F39; padding:3px 10px; margin-bottom:14px; }
+  .demo-doclist{ display:flex; flex-direction:column; gap:8px; margin:16px 0 4px; border-top:1px solid #DCD7C9; padding-top:12px; }
+  .demo-docitem{ display:flex; align-items:flex-start; gap:14px; padding:14px 16px; background:#FBF8F4; border:1px solid #DCD7C9; border-left:3px solid #8C2F39; }
+  .demo-doctab{ flex-shrink:0; width:64px; text-align:center; padding:5px 3px; background:#8C2F39; color:#fff; font-size:10px; font-weight:700; font-family:ui-monospace,monospace; }
+  .demo-docname{ font-size:13px; font-weight:600; line-height:1.6; }
+  .demo-docreq{ font-size:9px; font-weight:700; color:#8C2F39; background:rgba(140,47,57,0.09); letter-spacing:0.05em; display:inline-block; padding:2px 7px; margin-top:6px; }
+  .demo-restart-row{ display:flex; align-items:center; justify-content:space-between; gap:14px; flex-wrap:wrap; margin-top:20px; padding-top:16px; border-top:1px solid #DCD7C9; }
+  .demo-restart-note{ font-size:11px; color:#8A8D96; max-width:280px; }
+  .demo-btn-primary{ background:#1A2238; color:#fff; border:1px solid #1A2238; font-family:inherit; font-size:12px; font-weight:600; padding:10px 20px; cursor:pointer; flex-shrink:0; }
+  .demo-btn-primary:hover{ background:#2A3458; }
+  .demo-empty{ font-size:13px; color:#5B5F6B; line-height:1.8; padding:14px 0; border-top:1px solid #DCD7C9; margin-top:16px; }
+
+  /* ---------- FAQ ---------- */
+  details.faq{ border-bottom:1px solid var(--line); padding:16px 0; }
+  details.faq:first-of-type{ border-top:1px solid var(--line); }
+  details.faq summary{
+    font-size:14.5px; font-weight:600; cursor:pointer; list-style:none;
+    display:flex; align-items:center; justify-content:space-between; gap:12px;
+  }
+  details.faq summary::-webkit-details-marker{ display:none; }
+  details.faq summary::after{ content:"+"; font-size:18px; color:var(--slate-soft); font-weight:400; flex-shrink:0; }
+  details.faq[open] summary::after{ content:"–"; }
+  details.faq p{ margin:12px 0 0; font-size:13.5px; color:var(--slate); max-width:60ch; }
+
+  /* ---------- Changelog ---------- */
+  .changelog-item{ display:flex; gap:20px; padding:14px 0; border-bottom:1px solid var(--line); }
+  .changelog-item:last-child{ border-bottom:none; }
+  .changelog-date{ font-family:var(--mono); font-feature-settings:"tnum"; font-size:12.5px; color:var(--slate-soft); flex-shrink:0; width:88px; padding-top:1px; }
+  .changelog-desc{ font-size:13.5px; }
+  .changelog-desc .tag{ font-size:10px; font-weight:700; color:var(--new-badge); background:var(--new-badge-soft); padding:2px 7px; margin-right:8px; letter-spacing:0.04em; }
+
+  footer.page-footer{
+    grid-column:1 / -1;
+    margin-top:20px;
+    padding-top:20px;
+    border-top:1px solid var(--line);
+    font-size:11.5px;
+    color:var(--slate-soft);
+    display:flex;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:8px;
+  }
+</style>
+
+<a class="skip-link" href="#overview">本文へスキップ</a>
+
+<div class="page">
+
+  <header class="cover">
+    <p class="cover-eyebrow">SALES-DOC GUIDE — 使い方マニュアル</p>
+    <h1>契約書面 判定ツール<br>操作マニュアル</h1>
+    <p class="cover-lede">サイトマイスターの新規契約時、主契約・オプション・キャッシュバックの選択内容にもとづいて、準備すべき契約書面を自動判定するツールの使い方を、画面例つきで説明します。</p>
+    <dl class="cover-meta">
+      <div>
+        <dt>公開URL</dt>
+        <dd><a href="http://hps-intra.com/docs/contract/" target="_blank" rel="noopener noreferrer">hps-intra.com/docs/contract/</a></dd>
+      </div>
+      <div>
+        <dt>対象</dt>
+        <dd>サイトマイスター営業担当者</dd>
+      </div>
+      <div>
+        <dt>最終更新</dt>
+        <dd>2026.07.21</dd>
+      </div>
+    </dl>
+  </header>
+
+  <nav class="sidebar" aria-label="もくじ">
+    <div class="sidebar-group">
+      <p class="sidebar-group-label">はじめに</p>
+      <ul>
+        <li><a href="#overview">ツールの概要</a></li>
+        <li><a href="#access">アクセス方法</a></li>
+      </ul>
+    </div>
+    <div class="sidebar-group">
+      <p class="sidebar-group-label">操作手順</p>
+      <ul>
+        <li><a href="#step1">STEP1 主契約</a></li>
+        <li><a href="#step2">STEP2 オプション</a></li>
+        <li><a href="#step3">STEP3 キャッシュバック</a></li>
+        <li><a href="#cbplan">複数年プラン選択</a></li>
+        <li><a href="#amount">導入事例 希望金額</a></li>
+        <li><a href="#result">判定結果の見方</a></li>
+        <li><a href="#navigation">戻る・やり直し</a></li>
+      </ul>
+    </div>
+    <div class="sidebar-group">
+      <p class="sidebar-group-label">その他</p>
+      <ul>
+        <li><a href="#demo">体験版で試す</a></li>
+        <li><a href="#faq">よくある質問</a></li>
+        <li><a href="#changelog">更新履歴</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main>
+
+    <section id="overview" class="doc-section">
+      <p class="sec-tag">Overview</p>
+      <h2>ツールの概要</h2>
+      <p class="intro">新商材の契約時、主契約・オプション・キャッシュバックの組み合わせによって、GMOサインで用意すべき契約申込書が変わります。本ツールは3つのSTEPの質問に答えるだけで、必要な書面一覧を自動判定します。</p>
+
+      <h3 class="sub-h">全体の流れ</h3>
+      <div class="mock-trail" style="margin-bottom:6px;">
+        <span class="chip">STEP1 主契約</span><span class="arrow">›</span>
+        <span class="chip">STEP2 オプション</span><span class="arrow">›</span>
+        <span class="chip">STEP3 キャッシュバック</span><span class="arrow">›</span>
+        <span class="chip">判定結果</span>
+      </div>
+      <p class="caption">各STEPで選択した内容は画面上部にパンくずとして積み上がっていきます。回答は自動保存されないため、離脱した場合は最初からやり直しになります。</p>
+    </section>
+
+    <section id="access" class="doc-section">
+      <p class="sec-tag">Access</p>
+      <h2>アクセス方法</h2>
+      <p class="intro">本ツールは社内限定の営業支援ツールです。<a href="http://hps-intra.com/docs/contract/" target="_blank" rel="noopener noreferrer">hps-intra.com/docs/contract/</a> にアクセスすると、初回のみ認証コードの入力を求められます。</p>
+
+      <div class="mock-frame">
+        <div class="mock-chrome"><span class="mock-dot"></span><span class="mock-dot"></span><span class="mock-dot a"></span><span class="mock-url">hps-intra.com/docs/contract/</span></div>
+        <div class="mock-body" style="display:flex; flex-direction:column; align-items:flex-start;">
+          <p class="mock-tag" style="color:#8C2F39;">アクセス制限</p>
+          <p class="mock-q">認証コードを入力してください</p>
+          <p class="mock-sub">このページは社内限定の営業支援ツールです。認証コードを入力してください。</p>
+          <div style="display:flex; gap:8px; width:100%; max-width:360px;">
+            <div style="flex:1; border:1px solid #DCD7C9; padding:11px 14px; font-size:13px; color:#8A8D96;">認証コードを入力</div>
+            <div style="background:#1A2238; color:#fff; font-size:12.5px; font-weight:600; padding:11px 18px; white-space:nowrap;">認証する</div>
+          </div>
+        </div>
+      </div>
+      <p class="caption">認証コードは営業サポート担当にご確認ください。一度認証に成功すると、同じブラウザでは次回以降入力を省略できます（ブラウザのデータを消去すると再入力が必要です）。</p>
+    </section>
+
+    <section id="step1" class="doc-section">
+      <p class="sec-tag">Step 1</p>
+      <h2>主契約のサービスを選択する</h2>
+      <p class="intro">今回契約するサービスを選択します。以降のSTEPは「サイトマイスター」を選んだ場合の分岐です。</p>
+
+      <div class="mock-frame">
+        <div class="mock-chrome"><span class="mock-dot"></span><span class="mock-dot"></span><span class="mock-dot a"></span><span class="mock-url">hps-intra.com/docs/contract/</span></div>
+        <div class="mock-body">
+          <p class="mock-tag">STEP 1 — 主契約</p>
+          <p class="mock-q">主契約のサービスを選択してください</p>
+          <p class="mock-sub">今回ご契約いただく商材の主契約サービスを選択してください。</p>
+          <div class="mock-choices">
+            <div class="mock-choice is-pick">サイトマイスター <span class="mock-pick-flag">選択する</span><span class="m-arrow">→</span></div>
+            <div class="mock-choice">ホームページリメイクスタジオ<span class="m-arrow">→</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="callout"><strong>注意：</strong>「ホームページリメイクスタジオ」は契約書面の判定に現在未対応です。選択すると「準備中です」という案内画面が表示され、そこでフローは終了します（「前の項目に戻る」で選び直し可能）。</div>
+    </section>
+
+    <section id="step2" class="doc-section">
+      <p class="sec-tag">Step 2</p>
+      <h2>オプションの有無・内容を選択する</h2>
+      <p class="intro">多言語対応・訪日コンテンツ作成のオプションが含まれる契約かどうかを選択します。「オプションあり」を選ぶと、続けて内容の選択が表示されます。</p>
+
+      <h3 class="sub-h">2-1. オプションの有無</h3>
+      <div class="mock-frame">
+        <div class="mock-chrome"><span class="mock-dot"></span><span class="mock-dot"></span><span class="mock-dot a"></span><span class="mock-url">hps-intra.com/docs/contract/</span></div>
+        <div class="mock-body">
+          <div class="mock-trail"><span class="chip">01 サイトマイスター</span></div>
+          <p class="mock-tag">STEP 2 — オプション</p>
+          <p class="mock-q">オプションのご契約はありますか？</p>
+          <p class="mock-sub">多言語対応・訪日コンテンツ作成などのオプションを含む契約かどうかを選択してください。</p>
+          <div class="mock-choices">
+            <div class="mock-choice">オプションなし<span class="m-arrow">→</span></div>
+            <div class="mock-choice is-pick">オプションあり <span class="mock-pick-flag">選択する</span><br><span class="m-sub" style="margin-top:2px; display:block;">多言語対応・訪日コンテンツ作成のいずれかを含む契約</span><span class="m-arrow">→</span></div>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="sub-h">2-2. オプションの内容（あり選択時のみ）</h3>
+      <div class="mock-frame">
+        <div class="mock-chrome"><span class="mock-dot"></span><span class="mock-dot"></span><span class="mock-dot a"></span><span class="mock-url">hps-intra.com/docs/contract/</span></div>
+        <div class="mock-body">
+          <div class="mock-trail"><span class="chip">01 サイトマイスター</span><span class="arrow">›</span><span class="chip">02 オプションあり</span></div>
+          <p class="mock-tag">STEP 2 — オプション内容</p>
+          <p class="mock-q">ご利用いただくオプションを選択してください</p>
+          <p class="mock-sub">対象となるオプションの組み合わせを選択してください。</p>
+          <div class="mock-choices">
+            <div class="mock-choice">多言語対応のみ<span class="m-arrow">→</span></div>
+            <div class="mock-choice">訪日コンテンツ作成のみ<span class="m-arrow">→</span></div>
+            <div class="mock-choice is-pick">多言語対応・訪日コンテンツ作成 両方 <span class="mock-pick-flag">選択する</span><span class="m-arrow">→</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ref-table-wrap">
+        <table class="ref-table">
+          <caption>選択内容と判定される書面</caption>
+          <thead><tr><th>選択内容</th><th>書面</th></tr></thead>
+          <tbody>
+            <tr><td>オプションなし</td><td class="code">HP-01</td></tr>
+            <tr><td>オプションあり・多言語対応のみ</td><td class="code">HP-03</td></tr>
+            <tr><td>オプションあり・訪日コンテンツ作成のみ</td><td class="code">HP-04</td></tr>
+            <tr><td>オプションあり・両方</td><td class="code">HP-02</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="step3" class="doc-section">
+      <p class="sec-tag">Step 3</p>
+      <h2>キャッシュバックの有無・種類を選択する</h2>
+      <p class="intro">複数年契約キャッシュバック、または導入事例掲載プログラムのいずれかを利用する場合は「する」を選択し、続けて種類を選びます。</p>
+
+      <h3 class="sub-h">3-1. キャッシュバックの有無</h3>
+      <div class="mock-frame">
+        <div class="mock-chrome"><span class="mock-dot"></span><span class="mock-dot"></span><span class="mock-dot a"></span><span class="mock-url">hps-intra.com/docs/contract/</span></div>
+        <div class="mock-body">
+          <div class="mock-trail"><span class="chip">01 サイトマイスター</span><span class="arrow">›</span><span class="chip">02 オプションなし</span></div>
+          <p class="mock-tag">STEP 3 — キャッシュバック</p>
+          <p class="mock-q">キャッシュバックのご契約はありますか？</p>
+          <p class="mock-sub">複数年契約キャッシュバック、または導入事例掲載プログラムをご利用の場合は「する」を選択してください。</p>
+          <div class="mock-choices">
+            <div class="mock-choice">キャッシュバックしない<span class="m-arrow">→</span></div>
+            <div class="mock-choice is-pick">キャッシュバックする <span class="mock-pick-flag">選択する</span><span class="m-arrow">→</span></div>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="sub-h">3-2. キャッシュバックの種類</h3>
+      <div class="mock-frame">
+        <div class="mock-chrome"><span class="mock-dot"></span><span class="mock-dot"></span><span class="mock-dot a"></span><span class="mock-url">hps-intra.com/docs/contract/</span></div>
+        <div class="mock-body">
+          <div class="mock-trail"><span class="chip">01 サイトマイスター</span><span class="arrow">›</span><span class="chip">02 オプションなし</span><span class="arrow">›</span><span class="chip">03 CBする</span></div>
+          <p class="mock-tag">STEP 3 — キャッシュバック内容</p>
+          <p class="mock-q">キャッシュバックの種類を選択してください</p>
+          <p class="mock-sub">対象となるキャッシュバックの組み合わせを選択してください。</p>
+          <div class="mock-choices">
+            <div class="mock-choice">複数年契約キャッシュバックのみ<span class="m-arrow">→</span></div>
+            <div class="mock-choice">導入事例掲載プログラムのみ<span class="m-arrow">→</span></div>
+            <div class="mock-choice is-pick">複数年契約・導入事例掲載 両方 <span class="mock-pick-flag">選択する</span><span class="m-arrow">→</span></div>
+          </div>
+        </div>
+      </div>
+      <p class="caption">「複数年契約キャッシュバックのみ」または「両方」を選ぶと、続けて<a href="#cbplan">複数年契約キャッシュバックのプラン選択</a>に進みます。「導入事例掲載プログラムのみ」を選んだ場合は、プラン選択をスキップして<a href="#amount">導入事例の希望金額選択</a>に進みます。</p>
+    </section>
+
+    <section id="cbplan" class="doc-section">
+      <p class="sec-tag">Step 3 続き<span class="new-badge">2026.07.21 追加</span></p>
+      <h2>複数年契約キャッシュバックのプランを選択する</h2>
+      <p class="intro">複数年契約キャッシュバックは、契約年数（2年・3年）とプラン（ベーシック・プレミアム）の組み合わせで4種類に分かれています。</p>
+
+      <div class="callout"><strong>ここに注意：</strong>プレミアムプランのキャッシュバック額は「2年契約＝15万円」「3年契約＝20万円」ですが、ベーシックプランの3年契約も15万円のため、金額だけで選ぶと2年・3年を取り違えます。画面では契約年数の見出し（2年契約／3年契約）でグループ分けされているので、必ず年数から確認してください。</div>
+
+      <div class="mock-frame">
+        <div class="mock-chrome"><span class="mock-dot"></span><span class="mock-dot"></span><span class="mock-dot a"></span><span class="mock-url">hps-intra.com/docs/contract/</span></div>
+        <div class="mock-body">
+          <div class="mock-trail"><span class="chip">01 サイトマイスター</span><span class="arrow">›</span><span class="chip">02 オプションなし</span><span class="arrow">›</span><span class="chip">03 CBする</span><span class="arrow">›</span><span class="chip">04 両方</span></div>
+          <p class="mock-tag">STEP 3 — 複数年契約キャッシュバック</p>
+          <p class="mock-q">複数年契約キャッシュバックのプランを選択してください</p>
+          <p class="mock-sub">契約年数とプラン（キャッシュバック金額）の組み合わせを選択してください。15万円のプランは2年・3年の両方にあるため、契約年数とあわせてご確認ください。</p>
+          <div class="mock-choices">
+            <p class="mock-group-label">2年契約</p>
+            <div class="mock-choice">ベーシックプラン<span class="m-sub">キャッシュバック 10万円</span><span class="m-arrow">→</span></div>
+            <div class="mock-choice">プレミアムプラン<span class="m-sub">キャッシュバック 15万円</span><span class="m-arrow">→</span></div>
+            <p class="mock-group-label">3年契約</p>
+            <div class="mock-choice">ベーシックプラン<span class="m-sub">キャッシュバック 15万円</span><span class="m-arrow">→</span></div>
+            <div class="mock-choice is-pick">プレミアムプラン <span class="mock-pick-flag">選択する</span><span class="m-sub">キャッシュバック 20万円</span><span class="m-arrow">→</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ref-table-wrap">
+        <table class="ref-table">
+          <caption>プランと判定される書面</caption>
+          <thead><tr><th>契約年数</th><th>プラン</th><th>キャッシュバック額</th><th>書面</th></tr></thead>
+          <tbody>
+            <tr><td>2年契約</td><td>ベーシックプラン</td><td>10万円</td><td class="code">HP-CB-01</td></tr>
+            <tr><td>2年契約</td><td>プレミアムプラン</td><td>15万円</td><td class="code">HP-CB-02</td></tr>
+            <tr><td>3年契約</td><td>ベーシックプラン</td><td>15万円</td><td class="code">HP-CB-03</td></tr>
+            <tr><td>3年契約</td><td>プレミアムプラン</td><td>20万円</td><td class="code">HP-CB-04</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="amount" class="doc-section">
+      <p class="sec-tag">Step 3 続き</p>
+      <h2>導入事例掲載プログラムの希望金額を選択する</h2>
+      <p class="intro">導入事例掲載プログラムを利用する場合、希望するキャッシュバック金額に応じて掲載項目数の条件が変わります。</p>
+
+      <div class="mock-frame">
+        <div class="mock-chrome"><span class="mock-dot"></span><span class="mock-dot"></span><span class="mock-dot a"></span><span class="mock-url">hps-intra.com/docs/contract/</span></div>
+        <div class="mock-body">
+          <div class="mock-trail"><span class="chip">01 サイトマイスター</span><span class="arrow">›</span><span class="chip">02 オプションなし</span><span class="arrow">›</span><span class="chip">03 CBする</span><span class="arrow">›</span><span class="chip">04 両方</span><span class="arrow">›</span><span class="chip">05 3年契約・20万円</span></div>
+          <p class="mock-tag">STEP 3 — 導入事例 希望金額</p>
+          <p class="mock-q">導入事例掲載プログラムの希望金額を選択してください</p>
+          <p class="mock-sub">希望するキャッシュバック金額に応じて、掲載項目数の条件が変わります。</p>
+          <div class="mock-choices">
+            <div class="mock-choice">5万円<span class="m-sub">掲載項目数 5項目以上</span><span class="m-arrow">→</span></div>
+            <div class="mock-choice is-pick">10万円 <span class="mock-pick-flag">選択する</span><span class="m-sub">掲載項目数 10項目以上</span><span class="m-arrow">→</span></div>
+            <div class="mock-choice">15万円<span class="m-sub">掲載項目数 15項目以上</span><span class="m-arrow">→</span></div>
+            <div class="mock-choice">20万円<span class="m-sub">掲載項目数 20項目以上</span><span class="m-arrow">→</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ref-table-wrap">
+        <table class="ref-table">
+          <caption>希望金額と判定される書面</caption>
+          <thead><tr><th>希望金額</th><th>掲載項目数</th><th>書面</th></tr></thead>
+          <tbody>
+            <tr><td>5万円</td><td>5項目以上</td><td class="code">HP-DJ-01</td></tr>
+            <tr><td>10万円</td><td>10項目以上</td><td class="code">HP-DJ-02</td></tr>
+            <tr><td>15万円</td><td>15項目以上</td><td class="code">HP-DJ-03</td></tr>
+            <tr><td>20万円</td><td>20項目以上</td><td class="code">HP-DJ-04</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="result" class="doc-section">
+      <p class="sec-tag">Result</p>
+      <h2>判定結果画面の見方</h2>
+      <p class="intro">すべての質問に答えると、必要な契約書面が一覧で表示されます。一覧に表示された書面はすべて「必須」です。</p>
+
+      <div class="mock-frame">
+        <div class="mock-chrome"><span class="mock-dot"></span><span class="mock-dot"></span><span class="mock-dot a"></span><span class="mock-url">hps-intra.com/docs/contract/</span></div>
+        <div class="mock-body">
+          <div class="mock-trail"><span class="chip">01 サイトマイスター</span><span class="arrow">›</span><span class="chip">02 オプションなし</span><span class="arrow">›</span><span class="chip">03 CBする</span><span class="arrow">›</span><span class="chip">04 両方</span><span class="arrow">›</span><span class="chip">05 3年契約・20万円</span><span class="arrow">›</span><span class="chip">06 10万円</span></div>
+          <span class="mock-status">判定結果</span>
+          <p class="mock-q">必要な契約書面</p>
+          <p class="mock-sub">選択内容にもとづき、以下の書面をご準備ください。</p>
+          <div class="mock-doclist">
+            <div class="mock-docitem">
+              <div class="mock-doctab">HP-01</div>
+              <div><div class="mock-docname">サイトマイスター 契約申込書_オプションなし</div><span class="mock-docreq">必須</span></div>
+            </div>
+            <div class="mock-docitem">
+              <div class="mock-doctab">HP-CB-04</div>
+              <div><div class="mock-docname">サイトマイスター複数年契約キャッシュバック申込書_3年20万円</div><span class="mock-docreq">必須</span></div>
+            </div>
+            <div class="mock-docitem">
+              <div class="mock-doctab">HP-DJ-02</div>
+              <div><div class="mock-docname">導入事例掲載プログラム申込書_10万円_10項目以上</div><span class="mock-docreq">必須</span></div>
+            </div>
+          </div>
+          <div class="mock-cta-row">
+            <div class="mock-cta primary">GMOサインを開く</div>
+            <div class="mock-cta secondary">契約書・規約を確認する</div>
+          </div>
+        </div>
+      </div>
+      <p class="caption">「GMOサインを開く」は契約締結の実務に、「契約書・規約を確認する」はSharePoint上の書面ひな形フォルダにそれぞれ遷移します。選択内容によっては書面が0件（追加書面不要）の場合もあります。</p>
+    </section>
+
+    <section id="navigation" class="doc-section">
+      <p class="sec-tag">Navigation</p>
+      <h2>戻る・やり直しの操作</h2>
+      <p class="intro">選択を間違えた場合は、2種類の方法でやり直せます。</p>
+
+      <div class="mock-frame">
+        <div class="mock-chrome"><span class="mock-dot"></span><span class="mock-dot"></span><span class="mock-dot a"></span><span class="mock-url">hps-intra.com/docs/contract/</span></div>
+        <div class="mock-body">
+          <div class="mock-backlink">&larr; 前の項目に戻る</div>
+          <p class="mock-sub" style="margin-bottom:0;">クリックすると1つ前の質問だけに戻ります（その項目はもう一度選び直しが必要です）。</p>
+        </div>
+      </div>
+
+      <div class="mock-frame">
+        <div class="mock-chrome"><span class="mock-dot"></span><span class="mock-dot"></span><span class="mock-dot a"></span><span class="mock-url">hps-intra.com/docs/contract/</span></div>
+        <div class="mock-body">
+          <div class="mock-restart-row">
+            <p class="mock-restart-note">選択内容を変更する場合は、最初からやり直してください。</p>
+            <div class="mock-btn-primary">最初からやり直す</div>
+          </div>
+        </div>
+      </div>
+      <p class="caption">判定結果画面の下部に常に表示されています。クリックするとSTEP1まですべての回答がリセットされます。</p>
+    </section>
+
+    <section id="demo" class="doc-section">
+      <p class="sec-tag">Try it</p>
+      <h2>体験版で操作を試す</h2>
+      <p class="intro">認証コードなしで、実際の画面遷移をこの場で試せます。本番の判定ロジックと同じ内容です（結果はこのページ内だけで完結し、外部には送信されません）。</p>
+      <div class="demo-note">はじめから何度でもやり直せます。実際の hps-intra.com/docs/contract/ と同じ選択肢・同じ判定結果になります。</div>
+      <div class="demo-frame">
+        <div class="mock-chrome"><span class="mock-dot"></span><span class="mock-dot"></span><span class="mock-dot a"></span><span class="mock-url">体験版（このページ内）</span></div>
+        <div class="demo-body" id="demo-card"></div>
+      </div>
+    </section>
+
+    <section id="faq" class="doc-section">
+      <p class="sec-tag">FAQ</p>
+      <h2>よくある質問</h2>
+
+      <details class="faq">
+        <summary>15万円のプランが2年・3年どちらか分からなくなったら？</summary>
+        <p>金額ではなく契約年数の見出し（「2年契約」「3年契約」）で判断してください。迷った場合は一度「前の項目に戻る」でキャッシュバックの種類選択まで戻り、契約書の年数条項を確認してから選び直すと確実です。</p>
+      </details>
+      <details class="faq">
+        <summary>「複数年契約・導入事例掲載 両方」を選ぶと書面は何枚になる？</summary>
+        <p>主契約の書面（HP-01〜04のいずれか）に加えて、複数年契約キャッシュバック書面（HP-CB-01〜04のいずれか）と導入事例掲載プログラム書面（HP-DJ-01〜04のいずれか）が追加され、最大3枚になります。</p>
+      </details>
+      <details class="faq">
+        <summary>認証コードが分からない・忘れた場合は？</summary>
+        <p>ツール内には掲載していません。営業サポート担当、またはツール管理者にご確認ください。</p>
+      </details>
+      <details class="faq">
+        <summary>「ホームページリメイクスタジオ」を選んだ場合は？</summary>
+        <p>「契約書準備中です」という案内画面が表示され、書面判定は行われません。整備が完了するまで、この商材の書面確認は別途担当部署にご相談ください。</p>
+      </details>
+      <details class="faq">
+        <summary>スマートフォンからも使える？</summary>
+        <p>はい。レスポンシブ対応しているため、スマートフォン・タブレットからも同じ手順で操作できます。URLをブックマークしておくと便利です。</p>
+      </details>
+    </section>
+
+    <section id="changelog" class="doc-section">
+      <p class="sec-tag">Changelog</p>
+      <h2>更新履歴</h2>
+      <div class="changelog-item">
+        <div class="changelog-date">2026.07.21</div>
+        <div class="changelog-desc"><span class="tag">NEW</span>複数年契約キャッシュバックを「2年10万円 / 2年15万円 / 3年15万円 / 3年20万円」の4プランに分割し、契約年数でグループ化したプラン選択STEPを追加しました。</div>
+      </div>
+      <div class="changelog-item">
+        <div class="changelog-date">2026.06.21</div>
+        <div class="changelog-desc">初版公開。認証コードによるアクセス制限、主契約・オプション・キャッシュバックの判定ロジック、GMOサイン／契約書規約への次アクション導線などを実装しました。</div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="page-footer">
+    <span>iFLAG Co., Ltd. — 社内営業支援ツール マニュアル</span>
+    <span>本マニュアルは hps-intra.com/docs/contract/ の画面構成にもとづき作成しています</span>
+  </footer>
+
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ---------- Scrollspy for sidebar ---------- */
+  var links = Array.prototype.slice.call(document.querySelectorAll('.sidebar a'));
+  var sections = links.map(function(a){ return document.querySelector(a.getAttribute('href')); }).filter(Boolean);
+
+  function onScroll(){
+    var pos = window.scrollY + 120;
+    var activeIdx = 0;
+    sections.forEach(function(sec, i){
+      if (sec.offsetTop <= pos) activeIdx = i;
+    });
+    links.forEach(function(a, i){ a.classList.toggle('is-active', i === activeIdx); });
+  }
+  document.addEventListener('scroll', onScroll, { passive:true });
+  onScroll();
+
+  /* ---------- Interactive demo (mirrors the production wizard logic) ---------- */
+  var DOCS = {
+    "HP-01":   { name: "【全社共通】サイトマイスター 契約申込書_オプションなし" },
+    "HP-02":   { name: "【全社共通】サイトマイスター 契約申込書_オプションあり（多言語、訪日）" },
+    "HP-03":   { name: "【全社共通】サイトマイスター 契約申込書_オプションあり（多言語のみ）" },
+    "HP-04":   { name: "【全社共通】サイトマイスター 契約申込書_オプションあり（訪日のみ）" },
+    "HP-CB-01":{ name: "【全社共通】サイトマイスター複数年契約キャッシュバック申込書_2年10万円" },
+    "HP-CB-02":{ name: "【全社共通】サイトマイスター複数年契約キャッシュバック申込書_2年15万円" },
+    "HP-CB-03":{ name: "【全社共通】サイトマイスター複数年契約キャッシュバック申込書_3年15万円" },
+    "HP-CB-04":{ name: "【全社共通】サイトマイスター複数年契約キャッシュバック申込書_3年20万円" },
+    "HP-DJ-01":{ name: "【全社共通】導入事例掲載プログラム申込書_5万円_5項目以上" },
+    "HP-DJ-02":{ name: "【全社共通】導入事例掲載プログラム申込書_10万円_10項目以上" },
+    "HP-DJ-03":{ name: "【全社共通】導入事例掲載プログラム申込書_15万円_15項目以上" },
+    "HP-DJ-04":{ name: "【全社共通】導入事例掲載プログラム申込書_20万円_20項目以上" }
+  };
+  var CB_PLANS = {
+    "01": { years: "2年契約", tier: "ベーシックプラン", amount: "10" },
+    "02": { years: "2年契約", tier: "プレミアムプラン", amount: "15" },
+    "03": { years: "3年契約", tier: "ベーシックプラン", amount: "15" },
+    "04": { years: "3年契約", tier: "プレミアムプラン", amount: "20" }
+  };
+
+  var path = {};
+  var history = [];
+  var current = "main";
+  var cardEl = document.getElementById("demo-card");
+
+  var STEPS = {
+    main: function(){
+      return {
+        tag: "STEP 1 — 主契約",
+        question: "主契約のサービスを選択してください",
+        sub: "今回ご契約いただく商材の主契約サービスを選択してください。",
+        choices: [
+          { label: "サイトマイスター", go: "option", set: { mainContract: "サイトマイスター" } },
+          { label: "ホームページリメイクスタジオ", go: "remake_result", set: { mainContract: "ホームページリメイクスタジオ" } }
+        ]
+      };
+    },
+    remake_result: function(){ return { pending:true }; },
+    option: function(){
+      return {
+        tag: "STEP 2 — オプション",
+        question: "オプションのご契約はありますか？",
+        sub: "多言語対応・訪日コンテンツ作成などのオプションを含む契約かどうかを選択してください。",
+        choices: [
+          { label: "オプションなし", go: "cashback", set: { option: "なし" } },
+          { label: "オプションあり", sub: "多言語対応・訪日コンテンツ作成のいずれかを含む契約", go: "option_type", set: { option: "あり" } }
+        ]
+      };
+    },
+    option_type: function(){
+      return {
+        tag: "STEP 2 — オプション内容",
+        question: "ご利用いただくオプションを選択してください",
+        sub: "対象となるオプションの組み合わせを選択してください。",
+        choices: [
+          { label: "多言語対応のみ", go: "cashback", set: { optionType: "多言語のみ" } },
+          { label: "訪日コンテンツ作成のみ", go: "cashback", set: { optionType: "訪日のみ" } },
+          { label: "多言語対応・訪日コンテンツ作成 両方", go: "cashback", set: { optionType: "両方" } }
+        ]
+      };
+    },
+    cashback: function(){
+      return {
+        tag: "STEP 3 — キャッシュバック",
+        question: "キャッシュバックのご契約はありますか？",
+        sub: "複数年契約キャッシュバック、または導入事例掲載プログラムをご利用の場合は「する」を選択してください。",
+        choices: [
+          { label: "キャッシュバックしない", go: "result", set: { cashback: "しない" } },
+          { label: "キャッシュバックする", go: "cashback_type", set: { cashback: "する" } }
+        ]
+      };
+    },
+    cashback_type: function(){
+      return {
+        tag: "STEP 3 — キャッシュバック内容",
+        question: "キャッシュバックの種類を選択してください",
+        sub: "対象となるキャッシュバックの組み合わせを選択してください。",
+        choices: [
+          { label: "複数年契約キャッシュバックのみ", go: "cb_plan", set: { cashbackType: "複数年のみ" } },
+          { label: "導入事例掲載プログラムのみ", go: "amount", set: { cashbackType: "導入事例のみ" } },
+          { label: "複数年契約・導入事例掲載 両方", go: "cb_plan", set: { cashbackType: "両方" } }
+        ]
+      };
+    },
+    cb_plan: function(){
+      var next = (path.cashbackType === "両方") ? "amount" : "result";
+      return {
+        tag: "STEP 3 — 複数年契約キャッシュバック",
+        question: "複数年契約キャッシュバックのプランを選択してください",
+        sub: "契約年数とプラン（キャッシュバック金額）の組み合わせを選択してください。15万円のプランは2年・3年の両方にあるため、契約年数とあわせてご確認ください。",
+        groups: [
+          { label: "2年契約", choices: [
+            { label: "ベーシックプラン", sub: "キャッシュバック 10万円", go: next, set: { cbPlan: "01" } },
+            { label: "プレミアムプラン", sub: "キャッシュバック 15万円", go: next, set: { cbPlan: "02" } }
+          ]},
+          { label: "3年契約", choices: [
+            { label: "ベーシックプラン", sub: "キャッシュバック 15万円", go: next, set: { cbPlan: "03" } },
+            { label: "プレミアムプラン", sub: "キャッシュバック 20万円", go: next, set: { cbPlan: "04" } }
+          ]}
+        ]
+      };
+    },
+    amount: function(){
+      return {
+        tag: "STEP 3 — 導入事例 希望金額",
+        question: "導入事例掲載プログラムの希望金額を選択してください",
+        sub: "希望するキャッシュバック金額に応じて、掲載項目数の条件が変わります。",
+        choices: [
+          { label: "5万円", sub: "掲載項目数 5項目以上", go: "result", set: { amount: "5" } },
+          { label: "10万円", sub: "掲載項目数 10項目以上", go: "result", set: { amount: "10" } },
+          { label: "15万円", sub: "掲載項目数 15項目以上", go: "result", set: { amount: "15" } },
+          { label: "20万円", sub: "掲載項目数 20項目以上", go: "result", set: { amount: "20" } }
+        ]
+      };
+    },
+    result: function(){ return { result:true }; }
+  };
+
+  function computeDocs(p){
+    var codes = [];
+    if (p.option === "なし"){ codes.push("HP-01"); }
+    else if (p.option === "あり"){
+      if (p.optionType === "両方") codes.push("HP-02");
+      else if (p.optionType === "多言語のみ") codes.push("HP-03");
+      else if (p.optionType === "訪日のみ") codes.push("HP-04");
+    }
+    if (p.cashback === "する"){
+      if (p.cashbackType === "複数年のみ"){ codes.push("HP-CB-" + p.cbPlan); }
+      else if (p.cashbackType === "導入事例のみ"){ codes.push(amountToDJ(p.amount)); }
+      else if (p.cashbackType === "両方"){ codes.push("HP-CB-" + p.cbPlan); codes.push(amountToDJ(p.amount)); }
+    }
+    return codes;
+  }
+  function amountToDJ(a){ var m = { "5":"HP-DJ-01","10":"HP-DJ-02","15":"HP-DJ-03","20":"HP-DJ-04" }; return m[a]; }
+
+  var TRAIL_LABELS = {
+    mainContract: function(v){ return v; },
+    option: function(v){ return "オプション" + v; },
+    optionType: function(v){ return v; },
+    cashback: function(v){ return "CB" + v; },
+    cashbackType: function(v){ return v; },
+    cbPlan: function(v){ var p = CB_PLANS[v]; return p.years + "・" + p.amount + "万円"; },
+    amount: function(v){ return v + "万円"; }
+  };
+  var TRAIL_ORDER = ["mainContract","option","optionType","cashback","cashbackType","cbPlan","amount"];
+
+  function renderDemoTrail(){
+    var el = document.createElement("div");
+    el.className = "demo-trail";
+    var shown = 0;
+    TRAIL_ORDER.forEach(function(key){
+      if (path[key] === undefined) return;
+      if (shown > 0){
+        var arrow = document.createElement("span");
+        arrow.className = "arrow";
+        arrow.textContent = "›";
+        el.appendChild(arrow);
+      }
+      var chip = document.createElement("span");
+      chip.className = "chip";
+      chip.textContent = String(shown+1).padStart(2,"0") + " " + TRAIL_LABELS[key](path[key]);
+      el.appendChild(chip);
+      shown++;
+    });
+    return el;
+  }
+
+  function go(stepId, setValues){
+    history.push({ step: current, path: Object.assign({}, path) });
+    if (setValues) Object.assign(path, setValues);
+    current = stepId;
+    render();
+  }
+  function back(){
+    if (!history.length) return;
+    var prev = history.pop();
+    current = prev.step;
+    path = prev.path;
+    render();
+  }
+  function restart(){
+    path = {}; history = []; current = "main"; render();
+  }
+
+  function appendBack(container){
+    if (!history.length) return;
+    var b = document.createElement("button");
+    b.type = "button";
+    b.className = "demo-back";
+    b.innerHTML = "&larr; 前の項目に戻る";
+    b.addEventListener("click", back);
+    container.appendChild(b);
+  }
+
+  function buildChoiceBtn(choice){
+    var btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "demo-choice-btn";
+    var wrap = document.createElement("span");
+    var main = document.createElement("span");
+    main.textContent = choice.label;
+    wrap.appendChild(main);
+    if (choice.sub){
+      var subEl = document.createElement("span");
+      subEl.className = "sub";
+      subEl.textContent = choice.sub;
+      wrap.appendChild(subEl);
+    }
+    var arrow = document.createElement("span");
+    arrow.className = "arrow";
+    arrow.textContent = "→";
+    btn.appendChild(wrap);
+    btn.appendChild(arrow);
+    btn.addEventListener("click", function(){ go(choice.go, choice.set); });
+    return btn;
+  }
+
+  function render(){
+    cardEl.innerHTML = "";
+    cardEl.appendChild(renderDemoTrail());
+
+    var def = STEPS[current]();
+
+    if (def.pending){
+      appendBack(cardEl);
+      var st = document.createElement("span");
+      st.className = "demo-status";
+      st.textContent = "判定結果";
+      cardEl.appendChild(st);
+      var h = document.createElement("p");
+      h.className = "demo-q";
+      h.textContent = "契約書準備中です";
+      cardEl.appendChild(h);
+      var note = document.createElement("p");
+      note.className = "demo-sub";
+      note.style.maxWidth = "none";
+      note.textContent = "ホームページリメイクスタジオの契約申込書は現在準備中です。サイトマイスターの契約については引き続きこのツールで判定できます。";
+      cardEl.appendChild(note);
+      appendRestart(cardEl);
+      return;
+    }
+
+    if (def.result){
+      appendBack(cardEl);
+      var status = document.createElement("span");
+      status.className = "demo-status";
+      status.textContent = "判定結果";
+      cardEl.appendChild(status);
+      var q = document.createElement("p");
+      q.className = "demo-q";
+      q.textContent = "必要な契約書面";
+      cardEl.appendChild(q);
+      var sub = document.createElement("p");
+      sub.className = "demo-sub";
+      sub.style.maxWidth = "none";
+      sub.textContent = "選択内容にもとづき、以下の書面をご準備ください。";
+      cardEl.appendChild(sub);
+
+      var codes = computeDocs(path);
+      if (!codes.length){
+        var empty = document.createElement("p");
+        empty.className = "demo-empty";
+        empty.textContent = "追加の契約書面は不要です。";
+        cardEl.appendChild(empty);
+      } else {
+        var list = document.createElement("div");
+        list.className = "demo-doclist";
+        codes.forEach(function(code){
+          var item = document.createElement("div");
+          item.className = "demo-docitem";
+          var tab = document.createElement("div");
+          tab.className = "demo-doctab";
+          tab.textContent = code;
+          var nameWrap = document.createElement("div");
+          var name = document.createElement("div");
+          name.className = "demo-docname";
+          name.textContent = DOCS[code].name;
+          var req = document.createElement("span");
+          req.className = "demo-docreq";
+          req.textContent = "必須";
+          nameWrap.appendChild(name);
+          nameWrap.appendChild(req);
+          item.appendChild(tab);
+          item.appendChild(nameWrap);
+          list.appendChild(item);
+        });
+        cardEl.appendChild(list);
+      }
+      appendRestart(cardEl);
+      return;
+    }
+
+    appendBack(cardEl);
+    var tag = document.createElement("p");
+    tag.className = "demo-tag";
+    tag.textContent = def.tag;
+    cardEl.appendChild(tag);
+    var question = document.createElement("p");
+    question.className = "demo-q";
+    question.textContent = def.question;
+    cardEl.appendChild(question);
+    if (def.sub){
+      var subP = document.createElement("p");
+      subP.className = "demo-sub";
+      subP.textContent = def.sub;
+      cardEl.appendChild(subP);
+    }
+    var choicesWrap = document.createElement("div");
+    choicesWrap.className = "demo-choices";
+    if (def.groups){
+      def.groups.forEach(function(group){
+        var label = document.createElement("p");
+        label.className = "demo-group-label";
+        label.textContent = group.label;
+        choicesWrap.appendChild(label);
+        group.choices.forEach(function(c){ choicesWrap.appendChild(buildChoiceBtn(c)); });
+      });
+    } else {
+      def.choices.forEach(function(c){ choicesWrap.appendChild(buildChoiceBtn(c)); });
+    }
+    cardEl.appendChild(choicesWrap);
+  }
+
+  function appendRestart(container){
+    var row = document.createElement("div");
+    row.className = "demo-restart-row";
+    var note = document.createElement("p");
+    note.className = "demo-restart-note";
+    note.textContent = "選択内容を変更する場合は、最初からやり直してください。";
+    var btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "demo-btn-primary";
+    btn.textContent = "最初からやり直す";
+    btn.addEventListener("click", restart);
+    row.appendChild(note);
+    row.appendChild(btn);
+    container.appendChild(row);
+  }
+
+  render();
+})();
+</script>
