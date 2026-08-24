@@ -410,7 +410,6 @@
   .mock-restart-note{ font-size:11px; color:#8A8D96; max-width:280px; }
   .mock-btn-primary{ background:#1A2238; color:#fff; border:1px solid #1A2238; font-size:12px; font-weight:600; padding:10px 20px; flex-shrink:0; }
 
-  .mock-pending{ border:1px solid #DCD7C9; border-left:3px solid #8C2F39; padding:16px 18px; background:#FBFAF8; font-size:12.5px; line-height:1.8; }
 
   /* ---------- Interactive demo (functional, reuses same visual language) ---------- */
   .demo-note{
@@ -500,7 +499,7 @@
   <header class="cover">
     <p class="cover-eyebrow">SALES-DOC GUIDE — 使い方マニュアル</p>
     <h1>契約書面 判定ツール<br>操作マニュアル</h1>
-    <p class="cover-lede">サイトマイスターの新規契約時、主契約・オプション・キャッシュバックの選択内容にもとづいて、準備すべき契約書面を自動判定するツールの使い方を、画面例つきで説明します。</p>
+    <p class="cover-lede">サイトマイスター・ホームページリメイクスタジオの新規契約時、主契約・プラン・オプション・キャッシュバックの選択内容にもとづいて、準備すべき契約書面を自動判定するツールの使い方を、画面例つきで説明します。</p>
     <dl class="cover-meta">
       <div>
         <dt>公開URL</dt>
@@ -512,7 +511,7 @@
       </div>
       <div>
         <dt>最終更新</dt>
-        <dd>2026.07.21</dd>
+        <dd>2026.08.18</dd>
       </div>
     </dl>
   </header>
@@ -526,13 +525,30 @@
       </ul>
     </div>
     <div class="sidebar-group">
-      <p class="sidebar-group-label">操作手順</p>
+      <p class="sidebar-group-label">操作手順（共通）</p>
       <ul>
         <li><a href="#step1">STEP1 主契約</a></li>
+      </ul>
+    </div>
+    <div class="sidebar-group">
+      <p class="sidebar-group-label">サイトマイスター</p>
+      <ul>
         <li><a href="#step2">STEP2 オプション</a></li>
         <li><a href="#step3">STEP3 キャッシュバック</a></li>
         <li><a href="#cbplan">複数年プラン選択</a></li>
         <li><a href="#amount">導入事例 希望金額</a></li>
+      </ul>
+    </div>
+    <div class="sidebar-group">
+      <p class="sidebar-group-label">リメイクスタジオ</p>
+      <ul>
+        <li><a href="#remake">STEP2 プラン</a></li>
+        <li><a href="#remake-option">STEP3 オプション</a></li>
+      </ul>
+    </div>
+    <div class="sidebar-group">
+      <p class="sidebar-group-label">判定結果</p>
+      <ul>
         <li><a href="#result">判定結果の見方</a></li>
         <li><a href="#navigation">戻る・やり直し</a></li>
       </ul>
@@ -552,16 +568,27 @@
     <section id="overview" class="doc-section">
       <p class="sec-tag">Overview</p>
       <h2>ツールの概要</h2>
-      <p class="intro">新商材の契約時、主契約・オプション・キャッシュバックの組み合わせによって、GMOサインで用意すべき契約申込書が変わります。本ツールは3つのSTEPの質問に答えるだけで、必要な書面一覧を自動判定します。</p>
+      <p class="intro">新商材の契約時、主契約・プラン・オプション・キャッシュバックの組み合わせによって、GMOサインで用意すべき契約申込書が変わります。本ツールは3つのSTEPの質問に答えるだけで、必要な書面一覧を自動判定します。STEP1で選んだ主契約によって、STEP2以降の質問内容が変わります。</p>
 
-      <h3 class="sub-h">全体の流れ</h3>
+      <h3 class="sub-h">全体の流れ（サイトマイスター）</h3>
       <div class="mock-trail" style="margin-bottom:6px;">
         <span class="chip">STEP1 主契約</span><span class="arrow">›</span>
         <span class="chip">STEP2 オプション</span><span class="arrow">›</span>
         <span class="chip">STEP3 キャッシュバック</span><span class="arrow">›</span>
         <span class="chip">判定結果</span>
       </div>
-      <p class="caption">各STEPで選択した内容は画面上部にパンくずとして積み上がっていきます。回答は自動保存されないため、離脱した場合は最初からやり直しになります。</p>
+      <p class="caption">主契約書面（HP-01〜04）に、キャッシュバック書面（HP-CB／HP-DJ）が加わり、最大3枚になります。</p>
+
+      <h3 class="sub-h">全体の流れ（ホームページリメイクスタジオ）</h3>
+      <div class="mock-trail" style="margin-bottom:6px;">
+        <span class="chip">STEP1 主契約</span><span class="arrow">›</span>
+        <span class="chip">STEP2 プラン</span><span class="arrow">›</span>
+        <span class="chip">STEP3 オプション</span><span class="arrow">›</span>
+        <span class="chip">判定結果</span>
+      </div>
+      <p class="caption">プラン（AIゼロ／AIブースト）とオプション内容の組み合わせで、RM-01〜08のうち1枚が決まります。キャッシュバックの選択はありません。</p>
+
+      <p class="caption" style="margin-top:18px;">各STEPで選択した内容は画面上部にパンくずとして積み上がっていきます。回答は自動保存されないため、離脱した場合は最初からやり直しになります。</p>
     </section>
 
     <section id="access" class="doc-section">
@@ -587,7 +614,7 @@
     <section id="step1" class="doc-section">
       <p class="sec-tag">Step 1</p>
       <h2>主契約のサービスを選択する</h2>
-      <p class="intro">今回契約するサービスを選択します。以降のSTEPは「サイトマイスター」を選んだ場合の分岐です。</p>
+      <p class="intro">今回契約するサービスを選択します。ここでの選択によって、STEP2以降の質問内容が変わります。</p>
 
       <div class="mock-frame">
         <div class="mock-chrome"><span class="mock-dot"></span><span class="mock-dot"></span><span class="mock-dot a"></span><span class="mock-url">hps-intra.com/docs/contract/</span></div>
@@ -601,11 +628,11 @@
           </div>
         </div>
       </div>
-      <div class="callout"><strong>注意：</strong>「ホームページリメイクスタジオ」は契約書面の判定に現在未対応です。選択すると「準備中です」という案内画面が表示され、そこでフローは終了します（「前の項目に戻る」で選び直し可能）。</div>
+      <div class="callout"><strong>分岐の違い：</strong>「サイトマイスター」を選ぶと<a href="#step2">STEP2 オプション</a>へ、「ホームページリメイクスタジオ」を選ぶと<a href="#remake">STEP2 プラン</a>へ進みます。リメイクスタジオはキャッシュバックの選択がなく、STEP3のオプション選択で判定が完了します。</div>
     </section>
 
     <section id="step2" class="doc-section">
-      <p class="sec-tag">Step 2</p>
+      <p class="sec-tag">Step 2 — サイトマイスター</p>
       <h2>オプションの有無・内容を選択する</h2>
       <p class="intro">多言語対応・訪日コンテンツ作成のオプションが含まれる契約かどうかを選択します。「オプションあり」を選ぶと、続けて内容の選択が表示されます。</p>
 
@@ -655,7 +682,7 @@
     </section>
 
     <section id="step3" class="doc-section">
-      <p class="sec-tag">Step 3</p>
+      <p class="sec-tag">Step 3 — サイトマイスター</p>
       <h2>キャッシュバックの有無・種類を選択する</h2>
       <p class="intro">複数年契約キャッシュバック、または導入事例掲載プログラムのいずれかを利用する場合は「する」を選択し、続けて種類を選びます。</p>
 
@@ -693,7 +720,7 @@
     </section>
 
     <section id="cbplan" class="doc-section">
-      <p class="sec-tag">Step 3 続き<span class="new-badge">2026.07.21 追加</span></p>
+      <p class="sec-tag">Step 3 続き — サイトマイスター</p>
       <h2>複数年契約キャッシュバックのプランを選択する</h2>
       <p class="intro">複数年契約キャッシュバックは、契約年数（2年・3年）とプラン（ベーシック・プレミアム）の組み合わせで4種類に分かれています。</p>
 
@@ -732,7 +759,7 @@
     </section>
 
     <section id="amount" class="doc-section">
-      <p class="sec-tag">Step 3 続き</p>
+      <p class="sec-tag">Step 3 続き — サイトマイスター</p>
       <h2>導入事例掲載プログラムの希望金額を選択する</h2>
       <p class="intro">導入事例掲載プログラムを利用する場合、希望するキャッシュバック金額に応じて掲載項目数の条件が変わります。</p>
 
@@ -764,6 +791,78 @@
           </tbody>
         </table>
       </div>
+    </section>
+
+    <section id="remake" class="doc-section">
+      <p class="sec-tag">Step 2 — リメイクスタジオ<span class="new-badge">2026.08.18 追加</span></p>
+      <h2>プラン（AIゼロ／AIブースト）を選択する</h2>
+      <p class="intro">STEP1で「ホームページリメイクスタジオ」を選ぶと、プランの選択に進みます。ホームページリメイクスタジオは「AIゼロ」「AIブースト」の2プランで契約申込書が分かれるため、まずどちらのプランかを選択します。</p>
+
+      <div class="mock-frame">
+        <div class="mock-chrome"><span class="mock-dot"></span><span class="mock-dot"></span><span class="mock-dot a"></span><span class="mock-url">hps-intra.com/docs/contract/</span></div>
+        <div class="mock-body">
+          <div class="mock-trail"><span class="chip">01 ホームページリメイクスタジオ</span></div>
+          <p class="mock-tag">STEP 2 — プラン</p>
+          <p class="mock-q">ご契約いただくプランを選択してください</p>
+          <p class="mock-sub">ホームページリメイクスタジオは「AIゼロ」「AIブースト」の2プランで契約申込書が分かれます。</p>
+          <div class="mock-choices">
+            <div class="mock-choice">AIゼロ<span class="m-arrow">→</span></div>
+            <div class="mock-choice is-pick">AIブースト <span class="mock-pick-flag">選択する</span><span class="m-arrow">→</span></div>
+          </div>
+        </div>
+      </div>
+      <p class="caption">プランを取り違えると書面がすべて別のものになります。受注内容のプラン名を必ず確認してから選択してください。</p>
+    </section>
+
+    <section id="remake-option" class="doc-section">
+      <p class="sec-tag">Step 3 — リメイクスタジオ<span class="new-badge">2026.08.18 追加</span></p>
+      <h2>オプションの有無・内容を選択する</h2>
+      <p class="intro">サイトマイスターと同じく、多言語対応・訪日コンテンツ作成のオプションを含む契約かどうかを選択します。「オプションなし」を選んだ時点で判定結果に進み、「オプションあり」の場合は続けて内容を選択します。</p>
+
+      <h3 class="sub-h">3-1. オプションの有無</h3>
+      <div class="mock-frame">
+        <div class="mock-chrome"><span class="mock-dot"></span><span class="mock-dot"></span><span class="mock-dot a"></span><span class="mock-url">hps-intra.com/docs/contract/</span></div>
+        <div class="mock-body">
+          <div class="mock-trail"><span class="chip">01 ホームページリメイクスタジオ</span><span class="arrow">›</span><span class="chip">02 AIブースト</span></div>
+          <p class="mock-tag">STEP 3 — オプション</p>
+          <p class="mock-q">オプションのご契約はありますか？</p>
+          <p class="mock-sub">多言語対応・訪日コンテンツ作成などのオプションを含む契約かどうかを選択してください。</p>
+          <div class="mock-choices">
+            <div class="mock-choice">オプションなし<span class="m-arrow">→</span></div>
+            <div class="mock-choice is-pick">オプションあり <span class="mock-pick-flag">選択する</span><br><span class="m-sub" style="margin-top:2px; display:block;">多言語対応・訪日コンテンツ作成のいずれかを含む契約</span><span class="m-arrow">→</span></div>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="sub-h">3-2. オプションの内容（あり選択時のみ）</h3>
+      <div class="mock-frame">
+        <div class="mock-chrome"><span class="mock-dot"></span><span class="mock-dot"></span><span class="mock-dot a"></span><span class="mock-url">hps-intra.com/docs/contract/</span></div>
+        <div class="mock-body">
+          <div class="mock-trail"><span class="chip">01 ホームページリメイクスタジオ</span><span class="arrow">›</span><span class="chip">02 AIブースト</span><span class="arrow">›</span><span class="chip">03 オプションあり</span></div>
+          <p class="mock-tag">STEP 3 — オプション内容</p>
+          <p class="mock-q">ご利用いただくオプションを選択してください</p>
+          <p class="mock-sub">対象となるオプションの組み合わせを選択してください。</p>
+          <div class="mock-choices">
+            <div class="mock-choice">多言語対応のみ<span class="m-arrow">→</span></div>
+            <div class="mock-choice">訪日コンテンツ作成のみ<span class="m-arrow">→</span></div>
+            <div class="mock-choice is-pick">多言語対応・訪日コンテンツ作成 両方 <span class="mock-pick-flag">選択する</span><span class="m-arrow">→</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ref-table-wrap">
+        <table class="ref-table">
+          <caption>プラン・オプションと判定される書面</caption>
+          <thead><tr><th>オプション内容</th><th>AIゼロ</th><th>AIブースト</th></tr></thead>
+          <tbody>
+            <tr><td>オプションなし</td><td class="code">RM-01</td><td class="code">RM-02</td></tr>
+            <tr><td>多言語対応のみ</td><td class="code">RM-05</td><td class="code">RM-06</td></tr>
+            <tr><td>訪日コンテンツ作成のみ</td><td class="code">RM-07</td><td class="code">RM-08</td></tr>
+            <tr><td>多言語対応・訪日コンテンツ作成 両方</td><td class="code">RM-03</td><td class="code">RM-04</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="callout"><strong>ここに注意：</strong>ホームページリメイクスタジオはキャッシュバックの選択STEPがありません。必要な書面はRM-01〜08のうち常に1枚だけです。複数年契約キャッシュバックや導入事例掲載プログラムのご相談があった場合は、営業サポート担当にご確認ください。</div>
     </section>
 
     <section id="result" class="doc-section">
@@ -855,7 +954,11 @@
       </details>
       <details class="faq">
         <summary>「ホームページリメイクスタジオ」を選んだ場合は？</summary>
-        <p>「契約書準備中です」という案内画面が表示され、書面判定は行われません。整備が完了するまで、この商材の書面確認は別途担当部署にご相談ください。</p>
+        <p>プラン（AIゼロ／AIブースト）とオプションの選択に進み、RM-01〜08のうち1枚が判定されます。サイトマイスターと違い、キャッシュバックの選択STEPはありません。詳しくは<a href="#remake">STEP2 プラン</a>を参照してください。</p>
+      </details>
+      <details class="faq">
+        <summary>リメイクスタジオでキャッシュバックの申込がある場合は？</summary>
+        <p>本ツールでは判定できません。ホームページリメイクスタジオはRM-01〜08の主契約書面のみを対象としているため、複数年契約キャッシュバックや導入事例掲載プログラムのご相談があった場合は、営業サポート担当にご確認ください。</p>
       </details>
       <details class="faq">
         <summary>スマートフォンからも使える？</summary>
@@ -866,6 +969,10 @@
     <section id="changelog" class="doc-section">
       <p class="sec-tag">Changelog</p>
       <h2>更新履歴</h2>
+      <div class="changelog-item">
+        <div class="changelog-date">2026.08.18</div>
+        <div class="changelog-desc"><span class="tag">NEW</span>ホームページリメイクスタジオのGMOサインテンプレート登録完了にあわせ、同商材の判定に対応しました。プラン（AIゼロ／AIブースト）とオプション内容の組み合わせで、RM-01〜08のうち1枚を判定します。あわせて「契約書準備中です」の案内画面を廃止しました。</div>
+      </div>
       <div class="changelog-item">
         <div class="changelog-date">2026.07.21</div>
         <div class="changelog-desc"><span class="tag">NEW</span>複数年契約キャッシュバックを「2年10万円 / 2年15万円 / 3年15万円 / 3年20万円」の4プランに分割し、契約年数でグループ化したプラン選択STEPを追加しました。</div>
@@ -917,7 +1024,19 @@
     "HP-DJ-01":{ name: "【全社共通】導入事例掲載プログラム申込書_5万円_5項目以上" },
     "HP-DJ-02":{ name: "【全社共通】導入事例掲載プログラム申込書_10万円_10項目以上" },
     "HP-DJ-03":{ name: "【全社共通】導入事例掲載プログラム申込書_15万円_15項目以上" },
-    "HP-DJ-04":{ name: "【全社共通】導入事例掲載プログラム申込書_20万円_20項目以上" }
+    "HP-DJ-04":{ name: "【全社共通】導入事例掲載プログラム申込書_20万円_20項目以上" },
+    "RM-01":   { name: "【全社共通】ホームページリメイクスタジオ契約申込書（AIゼロ）_オプションなし" },
+    "RM-02":   { name: "【全社共通】ホームページリメイクスタジオ契約申込書（AIブースト）_オプションなし" },
+    "RM-03":   { name: "【全社共通】ホームページリメイクスタジオ契約申込書（AIゼロ）_オプションあり（多言語、訪日）" },
+    "RM-04":   { name: "【全社共通】ホームページリメイクスタジオ契約申込書（AIブースト）_オプションあり（多言語、訪日）" },
+    "RM-05":   { name: "【全社共通】ホームページリメイクスタジオ契約申込書（AIゼロ）_オプションあり（多言語のみ）" },
+    "RM-06":   { name: "【全社共通】ホームページリメイクスタジオ契約申込書（AIブースト）_オプションあり（多言語のみ）" },
+    "RM-07":   { name: "【全社共通】ホームページリメイクスタジオ契約申込書（AIゼロ）_オプションあり（訪日のみ）" },
+    "RM-08":   { name: "【全社共通】ホームページリメイクスタジオ契約申込書（AIブースト）_オプションあり（訪日のみ）" }
+  };
+  var RM_MATRIX = {
+    "AIゼロ":    { "なし": "RM-01", "両方": "RM-03", "多言語のみ": "RM-05", "訪日のみ": "RM-07" },
+    "AIブースト": { "なし": "RM-02", "両方": "RM-04", "多言語のみ": "RM-06", "訪日のみ": "RM-08" }
   };
   var CB_PLANS = {
     "01": { years: "2年契約", tier: "ベーシックプラン", amount: "10" },
@@ -939,11 +1058,44 @@
         sub: "今回ご契約いただく商材の主契約サービスを選択してください。",
         choices: [
           { label: "サイトマイスター", go: "option", set: { mainContract: "サイトマイスター" } },
-          { label: "ホームページリメイクスタジオ", go: "remake_result", set: { mainContract: "ホームページリメイクスタジオ" } }
+          { label: "ホームページリメイクスタジオ", go: "rm_plan", set: { mainContract: "ホームページリメイクスタジオ" } }
         ]
       };
     },
-    remake_result: function(){ return { pending:true }; },
+    rm_plan: function(){
+      return {
+        tag: "STEP 2 — プラン",
+        question: "ご契約いただくプランを選択してください",
+        sub: "ホームページリメイクスタジオは「AIゼロ」「AIブースト」の2プランで契約申込書が分かれます。",
+        choices: [
+          { label: "AIゼロ", go: "rm_option", set: { rmPlan: "AIゼロ" } },
+          { label: "AIブースト", go: "rm_option", set: { rmPlan: "AIブースト" } }
+        ]
+      };
+    },
+    rm_option: function(){
+      return {
+        tag: "STEP 3 — オプション",
+        question: "オプションのご契約はありますか？",
+        sub: "多言語対応・訪日コンテンツ作成などのオプションを含む契約かどうかを選択してください。",
+        choices: [
+          { label: "オプションなし", go: "result", set: { option: "なし" } },
+          { label: "オプションあり", sub: "多言語対応・訪日コンテンツ作成のいずれかを含む契約", go: "rm_option_type", set: { option: "あり" } }
+        ]
+      };
+    },
+    rm_option_type: function(){
+      return {
+        tag: "STEP 3 — オプション内容",
+        question: "ご利用いただくオプションを選択してください",
+        sub: "対象となるオプションの組み合わせを選択してください。",
+        choices: [
+          { label: "多言語対応のみ", go: "result", set: { optionType: "多言語のみ" } },
+          { label: "訪日コンテンツ作成のみ", go: "result", set: { optionType: "訪日のみ" } },
+          { label: "多言語対応・訪日コンテンツ作成 両方", go: "result", set: { optionType: "両方" } }
+        ]
+      };
+    },
     option: function(){
       return {
         tag: "STEP 2 — オプション",
@@ -1025,6 +1177,7 @@
   };
 
   function computeDocs(p){
+    if (p.mainContract === "ホームページリメイクスタジオ"){ return computeRemakeDocs(p); }
     var codes = [];
     if (p.option === "なし"){ codes.push("HP-01"); }
     else if (p.option === "あり"){
@@ -1041,8 +1194,16 @@
   }
   function amountToDJ(a){ var m = { "5":"HP-DJ-01","10":"HP-DJ-02","15":"HP-DJ-03","20":"HP-DJ-04" }; return m[a]; }
 
+  function computeRemakeDocs(p){
+    var optionKey = (p.option === "なし") ? "なし" : p.optionType;
+    var row = RM_MATRIX[p.rmPlan];
+    var code = row && row[optionKey];
+    return code ? [code] : [];
+  }
+
   var TRAIL_LABELS = {
     mainContract: function(v){ return v; },
+    rmPlan: function(v){ return v; },
     option: function(v){ return "オプション" + v; },
     optionType: function(v){ return v; },
     cashback: function(v){ return "CB" + v; },
@@ -1050,7 +1211,7 @@
     cbPlan: function(v){ var p = CB_PLANS[v]; return p.years + "・" + p.amount + "万円"; },
     amount: function(v){ return v + "万円"; }
   };
-  var TRAIL_ORDER = ["mainContract","option","optionType","cashback","cashbackType","cbPlan","amount"];
+  var TRAIL_ORDER = ["mainContract","rmPlan","option","optionType","cashback","cashbackType","cbPlan","amount"];
 
   function renderDemoTrail(){
     var el = document.createElement("div");
@@ -1128,25 +1289,6 @@
     cardEl.appendChild(renderDemoTrail());
 
     var def = STEPS[current]();
-
-    if (def.pending){
-      appendBack(cardEl);
-      var st = document.createElement("span");
-      st.className = "demo-status";
-      st.textContent = "判定結果";
-      cardEl.appendChild(st);
-      var h = document.createElement("p");
-      h.className = "demo-q";
-      h.textContent = "契約書準備中です";
-      cardEl.appendChild(h);
-      var note = document.createElement("p");
-      note.className = "demo-sub";
-      note.style.maxWidth = "none";
-      note.textContent = "ホームページリメイクスタジオの契約申込書は現在準備中です。サイトマイスターの契約については引き続きこのツールで判定できます。";
-      cardEl.appendChild(note);
-      appendRestart(cardEl);
-      return;
-    }
 
     if (def.result){
       appendBack(cardEl);

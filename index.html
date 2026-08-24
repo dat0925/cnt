@@ -397,7 +397,8 @@
   }
   .doc-tab{
     flex-shrink:0;
-    width:78px;
+    min-width:78px;
+    white-space:nowrap;
     text-align:center;
     padding:7px 4px;
     background:var(--accent);
@@ -425,6 +426,29 @@
     margin-top:8px;
   }
 
+  .doc-docs{
+    margin-top:12px;
+    padding-top:10px;
+    border-top:1px dashed var(--line);
+  }
+  .doc-docs-label{
+    font-size:11px;
+    font-weight:700;
+    letter-spacing:0.06em;
+    color:var(--slate);
+    margin-bottom:6px;
+  }
+  .doc-docs ul{
+    margin:0;
+    padding-left:1.1em;
+    list-style:disc;
+  }
+  .doc-docs li{
+    font-size:12.5px;
+    line-height:1.85;
+    color:var(--ink);
+  }
+
   .empty-note{
     font-size:13.5px;
     color:var(--slate);
@@ -432,20 +456,6 @@
     padding:18px 0;
     border-top:1px solid var(--line);
     margin-top:24px;
-  }
-
-  .pending-block{
-    border:1px solid var(--line);
-    border-left:3px solid var(--accent);
-    padding:22px 24px;
-    margin:24px 0 8px;
-    background:#FBFAF8;
-  }
-  .pending-block p{
-    font-size:14px;
-    line-height:1.9;
-    color:var(--ink);
-    margin:0;
   }
 
   .next-action{
@@ -712,6 +722,17 @@
   // ---------------------------------------------------------------
   // 契約書面マスタ
   // ---------------------------------------------------------------
+  // EPRESS MEO／SNS 系テンプレートに同梱される文書
+  // 出典: GMOサイン_テンプレート書類チェック.xlsx（GMOサイン管理画面 実測 2026-08-21）
+  var EP_DOC = {
+    apply:   "EPRESS MEO SNS サポートパック,MEOエージェント 契約申込書",
+    confirm: "EPRESS MEO SNS サポートパック、MEOエージェント 及び GBP管理代行サービス 内容確認書",
+    meo:     "EPRESS-MEOサポートパック 利用規約",
+    gbp:     "GBP管理代行サービス利用規約",
+    sns:     "EPRESSSNS利用規約",
+    mea:     "MEOエージェント利用規約"
+  };
+
   var DOCS = {
     "HP-01":   { name: "【全社共通】サイトマイスター 契約申込書_オプションなし" },
     "HP-02":   { name: "【全社共通】サイトマイスター 契約申込書_オプションあり（多言語、訪日）" },
@@ -724,8 +745,87 @@
     "HP-DJ-01":{ name: "【全社共通】導入事例掲載プログラム申込書_5万円_5項目以上" },
     "HP-DJ-02":{ name: "【全社共通】導入事例掲載プログラム申込書_10万円_10項目以上" },
     "HP-DJ-03":{ name: "【全社共通】導入事例掲載プログラム申込書_15万円_15項目以上" },
-    "HP-DJ-04":{ name: "【全社共通】導入事例掲載プログラム申込書_20万円_20項目以上" }
+    "HP-DJ-04":{ name: "【全社共通】導入事例掲載プログラム申込書_20万円_20項目以上" },
+    "RM-01":   { name: "【全社共通】ホームページリメイクスタジオ契約申込書（AIゼロ）_オプションなし" },
+    "RM-02":   { name: "【全社共通】ホームページリメイクスタジオ契約申込書（AIブースト）_オプションなし" },
+    "RM-03":   { name: "【全社共通】ホームページリメイクスタジオ契約申込書（AIゼロ）_オプションあり（多言語、訪日）" },
+    "RM-04":   { name: "【全社共通】ホームページリメイクスタジオ契約申込書（AIブースト）_オプションあり（多言語、訪日）" },
+    "RM-05":   { name: "【全社共通】ホームページリメイクスタジオ契約申込書（AIゼロ）_オプションあり（多言語のみ）" },
+    "RM-06":   { name: "【全社共通】ホームページリメイクスタジオ契約申込書（AIブースト）_オプションあり（多言語のみ）" },
+    "RM-07":   { name: "【全社共通】ホームページリメイクスタジオ契約申込書（AIゼロ）_オプションあり（訪日のみ）" },
+    "RM-08":   { name: "【全社共通】ホームページリメイクスタジオ契約申込書（AIブースト）_オプションあり（訪日のみ）" },
+
+    // EPRESS MEO（GBP管理代行・GSVオプションを含む構成のみ登録されている）
+    "MEO-01": { name: "【全社共通】EPRESS MEO スタンダード・プレミアム申込み／GBP・GSV",
+                docs: [EP_DOC.apply, EP_DOC.confirm, EP_DOC.meo, EP_DOC.gbp] },
+    "MEO-02": { name: "【全社共通】EPRESS MEO スタンダード・プレミアム申込み／MEOエージェント・GBP・GSV",
+                docs: [EP_DOC.apply, EP_DOC.confirm, EP_DOC.meo, EP_DOC.gbp, EP_DOC.mea] },
+    "MEO-03": { name: "【全社共通】EPRESS MEO ライト申込み／GBP・GSV",
+                docs: [EP_DOC.apply, EP_DOC.confirm, EP_DOC.meo, EP_DOC.gbp] },
+    "MEO-04": { name: "【全社共通】EPRESS MEO ライト申込み／MEOエージェント・GBP・GSV",
+                docs: [EP_DOC.apply, EP_DOC.confirm, EP_DOC.meo, EP_DOC.gbp, EP_DOC.mea] },
+
+    // EPRESS SNS
+    "SNS-01": { name: "【全社共通】EPRESS SNS スタンダード申込み",
+                docs: [EP_DOC.apply, EP_DOC.confirm, EP_DOC.sns] },
+    "SNS-02": { name: "【全社共通】EPRESS SNS スタンダード申込み／MEOエージェント",
+                docs: [EP_DOC.apply, EP_DOC.confirm, EP_DOC.sns, EP_DOC.mea] },
+    "SNS-03": { name: "【全社共通】EPRESS SNS スタンダード申込み／GBP・GSV",
+                docs: [EP_DOC.apply, EP_DOC.confirm, EP_DOC.sns, EP_DOC.gbp] },
+    "SNS-04": { name: "【全社共通】EPRESS SNS スタンダード申込み／MEOエージェント・GBP・GSV",
+                docs: [EP_DOC.apply, EP_DOC.confirm, EP_DOC.sns, EP_DOC.gbp, EP_DOC.mea] },
+    "SNS-05": { name: "【全社共通】EPRESS SNS シンプル申込み",
+                docs: [EP_DOC.apply, EP_DOC.confirm, EP_DOC.sns] },
+    "SNS-06": { name: "【全社共通】EPRESS SNS シンプル申込み／MEOエージェント",
+                docs: [EP_DOC.apply, EP_DOC.confirm, EP_DOC.sns, EP_DOC.mea] },
+    "SNS-07": { name: "【全社共通】EPRESS SNS シンプル申込み／GBP・GSV",
+                docs: [EP_DOC.apply, EP_DOC.confirm, EP_DOC.sns, EP_DOC.gbp] },
+    "SNS-08": { name: "【全社共通】EPRESS SNS シンプル申込み／MEOエージェント・GBP・GSV",
+                docs: [EP_DOC.apply, EP_DOC.confirm, EP_DOC.sns, EP_DOC.gbp, EP_DOC.mea] },
+
+    // EPRESS MEO＆SNS（GBP管理代行・GSVオプションを含む構成のみ登録されている）
+    "MEO-SNS-01": { name: "【全社共通】EPRESS MEO＆SNS申込み／GBP・GSV",
+                docs: [EP_DOC.apply, EP_DOC.confirm, EP_DOC.meo, EP_DOC.gbp, EP_DOC.sns] },
+    "MEO-SNS-02": { name: "【全社共通】EPRESS MEO＆SNS申込み／MEOエージェント・GBP・GSV",
+                docs: [EP_DOC.apply, EP_DOC.confirm, EP_DOC.meo, EP_DOC.gbp, EP_DOC.sns, EP_DOC.mea] },
+    "MEO-SNS-03": { name: "【全社共通】EPRESS MEOライト＆SNSシンプル申込み／GBP・GSV",
+                docs: [EP_DOC.apply, EP_DOC.confirm, EP_DOC.meo, EP_DOC.gbp, EP_DOC.sns] },
+    "MEO-SNS-04": { name: "【全社共通】EPRESS MEOライト＆SNSシンプル申込み／MEOエージェント・GBP・GSV",
+                docs: [EP_DOC.apply, EP_DOC.confirm, EP_DOC.meo, EP_DOC.gbp, EP_DOC.sns, EP_DOC.mea] },
+
+    // MEOエージェント単独
+    "MEA-01": { name: "【全社共通】MEOエージェント申込み",
+                docs: [EP_DOC.apply, EP_DOC.confirm, EP_DOC.mea] },
+    "MEA-02": { name: "【全社共通】MEOエージェント申込み／GBP・GSV",
+                docs: [EP_DOC.apply, EP_DOC.confirm, EP_DOC.gbp, EP_DOC.mea] }
   };
+
+  // ホームページリメイクスタジオの書面コード（プラン × オプション内容）
+  var RM_MATRIX = {
+    "AIゼロ":    { "なし": "RM-01", "両方": "RM-03", "多言語のみ": "RM-05", "訪日のみ": "RM-07" },
+    "AIブースト": { "なし": "RM-02", "両方": "RM-04", "多言語のみ": "RM-06", "訪日のみ": "RM-08" }
+  };
+
+  // EPRESS MEO・SNS の書面コード（対象サービス × プラン × 追加サービス）
+  // 追加サービスのキー: なし／MEA（MEOエージェント）／GBP（GBP管理代行・GSV）／両方
+  // MEO単独・MEO＆SNS は GBP・GSV を含む構成のみ登録されているため、なし／MEA の2択
+  var EP_MATRIX = {
+    "MEOのみ": {
+      "MEO スタンダード・プレミアム": { "なし": "MEO-01", "MEA": "MEO-02" },
+      "MEO ライト":                   { "なし": "MEO-03", "MEA": "MEO-04" }
+    },
+    "SNSのみ": {
+      "SNS スタンダード": { "なし": "SNS-01", "MEA": "SNS-02", "GBP": "SNS-03", "両方": "SNS-04" },
+      "SNS シンプル":     { "なし": "SNS-05", "MEA": "SNS-06", "GBP": "SNS-07", "両方": "SNS-08" }
+    },
+    "MEO＆SNS": {
+      "MEO スタンダード・プレミアム ＆ SNS スタンダード": { "なし": "MEO-SNS-01", "MEA": "MEO-SNS-02" },
+      "MEO ライト ＆ SNS シンプル":                       { "なし": "MEO-SNS-03", "MEA": "MEO-SNS-04" }
+    }
+  };
+
+  // MEOエージェント単独（GBP管理代行・GSVオプションの有無）
+  var MEA_MATRIX = { "なし": "MEA-01", "あり": "MEA-02" };
 
   // 複数年契約キャッシュバックのプラン一覧（契約年数 × ベーシック/プレミアム）
   var CB_PLANS = {
@@ -758,15 +858,139 @@
         sub: "今回ご契約いただく商材の主契約サービスを選択してください。",
         choices: [
           { label: "サイトマイスター", go: "option", set: { mainContract: "サイトマイスター" } },
-          { label: "ホームページリメイクスタジオ", go: "remake_result", set: { mainContract: "ホームページリメイクスタジオ" } }
+          { label: "ホームページリメイクスタジオ", go: "rm_plan", set: { mainContract: "ホームページリメイクスタジオ" } },
+          { label: "EPRESS MEO・SNS", sub: "EPRESS MEO／EPRESS SNS／MEO＆SNS のいずれかを含む契約", go: "ep_service", set: { mainContract: "EPRESS MEO・SNS" } },
+          { label: "MEOエージェント（単独）", sub: "EPRESS MEO・SNS を伴わないMEOエージェント単体の契約", go: "mea_option", set: { mainContract: "MEOエージェント" } }
         ]
       };
     },
 
-    remake_result: function(){
-      return { restart: true };
+    // --- ホームページリメイクスタジオ ---
+    rm_plan: function(){
+      return {
+        tag: "STEP 2 — プラン",
+        question: "ご契約いただくプランを選択してください",
+        sub: "ホームページリメイクスタジオは「AIゼロ」「AIブースト」の2プランで契約申込書が分かれます。",
+        choices: [
+          { label: "AIゼロ", go: "rm_option", set: { rmPlan: "AIゼロ" } },
+          { label: "AIブースト", go: "rm_option", set: { rmPlan: "AIブースト" } }
+        ]
+      };
     },
 
+    rm_option: function(){
+      return {
+        tag: "STEP 3 — オプション",
+        question: "オプションのご契約はありますか？",
+        sub: "多言語対応・訪日コンテンツ作成などのオプションを含む契約かどうかを選択してください。",
+        choices: [
+          { label: "オプションなし", go: "result", set: { option: "なし" } },
+          { label: "オプションあり", sub: "多言語対応・訪日コンテンツ作成のいずれかを含む契約", go: "rm_option_type", set: { option: "あり" } }
+        ]
+      };
+    },
+
+    rm_option_type: function(){
+      return {
+        tag: "STEP 3 — オプション内容",
+        question: "ご利用いただくオプションを選択してください",
+        sub: "対象となるオプションの組み合わせを選択してください。",
+        choices: [
+          { label: "多言語対応のみ", go: "result", set: { optionType: "多言語のみ" } },
+          { label: "訪日コンテンツ作成のみ", go: "result", set: { optionType: "訪日のみ" } },
+          { label: "多言語対応・訪日コンテンツ作成 両方", go: "result", set: { optionType: "両方" } }
+        ]
+      };
+    },
+
+    // --- EPRESS MEO・SNS ---
+    ep_service: function(){
+      return {
+        tag: "STEP 2 — 対象サービス",
+        question: "ご契約いただくサービスを選択してください",
+        sub: "EPRESS MEO と EPRESS SNS は、単独契約とセット契約で申込みテンプレートが分かれます。",
+        choices: [
+          { label: "EPRESS MEO のみ", go: "ep_plan", set: { epService: "MEOのみ" } },
+          { label: "EPRESS SNS のみ", go: "ep_plan", set: { epService: "SNSのみ" } },
+          { label: "EPRESS MEO ＆ SNS 両方", go: "ep_plan", set: { epService: "MEO＆SNS" } }
+        ]
+      };
+    },
+
+    ep_plan: function(){
+      var plans = {
+        "MEOのみ": {
+          sub: "EPRESS MEO は「スタンダード・プレミアム」と「ライト」で申込みテンプレートが分かれます。スタンダードとプレミアムは同一のテンプレートです。",
+          choices: [
+            { label: "スタンダード・プレミアム", go: "ep_addon", set: { epPlan: "MEO スタンダード・プレミアム" } },
+            { label: "ライト", go: "ep_addon", set: { epPlan: "MEO ライト" } }
+          ]
+        },
+        "SNSのみ": {
+          sub: "EPRESS SNS は「スタンダード」と「シンプル」で申込みテンプレートが分かれます。",
+          choices: [
+            { label: "スタンダード", go: "ep_addon", set: { epPlan: "SNS スタンダード" } },
+            { label: "シンプル", go: "ep_addon", set: { epPlan: "SNS シンプル" } }
+          ]
+        },
+        "MEO＆SNS": {
+          sub: "セット契約のテンプレートは、以下2つのプラン組み合わせのみが登録されています。グレードをまたぐ組み合わせ（例：MEOライト＆SNSスタンダード）のテンプレートはありません。",
+          choices: [
+            { label: "MEO スタンダード・プレミアム ＆ SNS スタンダード", go: "ep_addon", set: { epPlan: "MEO スタンダード・プレミアム ＆ SNS スタンダード" } },
+            { label: "MEO ライト ＆ SNS シンプル", go: "ep_addon", set: { epPlan: "MEO ライト ＆ SNS シンプル" } }
+          ]
+        }
+      };
+      var def = plans[path.epService];
+      return {
+        tag: "STEP 3 — プラン",
+        question: "ご契約いただくプランを選択してください",
+        sub: def.sub,
+        choices: def.choices
+      };
+    },
+
+    ep_addon: function(){
+      // SNS単独のみ GBP管理代行・GSVオプションの有無を選べる。
+      // MEO単独・MEO＆SNS は GBP・GSV を含む構成のテンプレートしか登録されていない。
+      if (path.epService === "SNSのみ"){
+        return {
+          tag: "STEP 4 — 追加サービス",
+          question: "あわせてご契約いただくサービスを選択してください",
+          sub: "MEOエージェント、GBP管理代行サービス・GSVオプションの有無で申込みテンプレートが分かれます。",
+          choices: [
+            { label: "追加サービスなし", go: "result", set: { epAddon: "なし" } },
+            { label: "MEOエージェントのみ", go: "result", set: { epAddon: "MEA" } },
+            { label: "GBP管理代行・GSVオプションのみ", go: "result", set: { epAddon: "GBP" } },
+            { label: "MEOエージェント・GBP管理代行・GSV 両方", go: "result", set: { epAddon: "両方" } }
+          ]
+        };
+      }
+      return {
+        tag: "STEP 4 — 追加サービス",
+        question: "MEOエージェントのご契約はありますか？",
+        sub: "EPRESS MEO を含むテンプレートは、GBP管理代行サービス・GSVオプションを含む構成のみが登録されています（GMOサイン実測 2026-08-21）。",
+        choices: [
+          { label: "MEOエージェントなし", sub: "GBP管理代行・GSVオプションは同梱", go: "result", set: { epAddon: "なし" } },
+          { label: "MEOエージェントあり", sub: "GBP管理代行・GSVオプションは同梱", go: "result", set: { epAddon: "MEA" } }
+        ]
+      };
+    },
+
+    // --- MEOエージェント（単独） ---
+    mea_option: function(){
+      return {
+        tag: "STEP 2 — 追加サービス",
+        question: "GBP管理代行サービス・GSVオプションのご契約はありますか？",
+        sub: "MEOエージェント単独契約は、GBP管理代行サービス・GSVオプションの有無で申込みテンプレートが分かれます。",
+        choices: [
+          { label: "GBP管理代行・GSVオプションなし", go: "result", set: { meaGbp: "なし" } },
+          { label: "GBP管理代行・GSVオプションあり", go: "result", set: { meaGbp: "あり" } }
+        ]
+      };
+    },
+
+    // --- サイトマイスター ---
     option: function(){
       return {
         tag: "STEP 2 — オプション",
@@ -865,6 +1089,22 @@
   // 必要書面の判定ロジック
   // ---------------------------------------------------------------
   function computeDocs(p){
+    // ホームページリメイクスタジオはプラン × オプション内容で1枚に確定する
+    if (p.mainContract === "ホームページリメイクスタジオ"){
+      return computeRemakeDocs(p);
+    }
+
+    // EPRESS MEO・SNS は対象サービス × プラン × 追加サービスで1枚に確定する
+    if (p.mainContract === "EPRESS MEO・SNS"){
+      return computeEpressDocs(p);
+    }
+
+    // MEOエージェント単独は GBP管理代行・GSVオプションの有無で1枚に確定する
+    if (p.mainContract === "MEOエージェント"){
+      var meaCode = MEA_MATRIX[p.meaGbp];
+      return meaCode ? [meaCode] : [];
+    }
+
     var codes = [];
 
     // 主契約・オプション（オプションあり/なしは排他関係。オプションありの場合、
@@ -897,11 +1137,35 @@
     return map[amount];
   }
 
+  // EPRESS MEO・SNS：対象サービス・プラン・追加サービスの組み合わせで書面が1枚決まる
+  function computeEpressDocs(p){
+    var byPlan = EP_MATRIX[p.epService];
+    var row = byPlan && byPlan[p.epPlan];
+    var code = row && row[p.epAddon];
+    return code ? [code] : [];
+  }
+
+  // ホームページリメイクスタジオ：プランとオプション内容の組み合わせで書面が1枚決まる
+  function computeRemakeDocs(p){
+    var optionKey = (p.option === "なし") ? "なし" : p.optionType;
+    var row = RM_MATRIX[p.rmPlan];
+    var code = row && row[optionKey];
+    return code ? [code] : [];
+  }
+
   // ---------------------------------------------------------------
   // 選択トレイル（画面上部のパンくず）
   // ---------------------------------------------------------------
   var TRAIL_LABELS = {
     mainContract: function(v){ return v; },
+    rmPlan: function(v){ return v; },
+    epService: function(v){ return v; },
+    epPlan: function(v){ return v; },
+    epAddon: function(v){
+      var map = { "なし": "追加なし", "MEA": "MEOエージェント", "GBP": "GBP・GSV", "両方": "MEA・GBP・GSV" };
+      return map[v] || v;
+    },
+    meaGbp: function(v){ return "GBP・GSV" + v; },
     option: function(v){ return "オプション" + v; },
     optionType: function(v){ return v; },
     cashback: function(v){ return "CB" + v; },
@@ -909,7 +1173,7 @@
     cbPlan: function(v){ var p = CB_PLANS[v]; return p.years + "・" + p.amount + "万円"; },
     amount: function(v){ return v + "万円"; }
   };
-  var TRAIL_ORDER = ["mainContract","option","optionType","cashback","cashbackType","cbPlan","amount"];
+  var TRAIL_ORDER = ["mainContract","rmPlan","epService","epPlan","epAddon","meaGbp","option","optionType","cashback","cashbackType","cbPlan","amount"];
 
   function renderTrail(){
     trailEl.innerHTML = "";
@@ -983,9 +1247,7 @@
     var panel = document.createElement("div");
     panel.className = "step-panel";
 
-    if (def.restart){
-      renderPendingResult(panel);
-    } else if (def.result){
+    if (def.result){
       renderResult(panel);
     } else {
       renderQuestion(panel, def);
@@ -1069,29 +1331,6 @@
     panel.appendChild(choicesWrap);
   }
 
-  function renderPendingResult(panel){
-    appendBackButton(panel);
-
-    var status = document.createElement("span");
-    status.className = "result-status";
-    status.textContent = "判定結果";
-    panel.appendChild(status);
-
-    var h2 = document.createElement("h2");
-    h2.className = "question";
-    h2.textContent = "契約書準備中です";
-    panel.appendChild(h2);
-
-    var block = document.createElement("div");
-    block.className = "pending-block";
-    var p = document.createElement("p");
-    p.textContent = "ホームページリメイクスタジオの契約申込書は、現在準備中です。整備が完了するまで今しばらくお待ちください。サイトマイスターの契約については、引き続きこのツールで書面を判定できます。";
-    block.appendChild(p);
-    panel.appendChild(block);
-
-    appendRestartRow(panel, "ホームページリメイクスタジオの書面は準備が整い次第、追ってご案内します。");
-  }
-
   function renderResult(panel){
     appendBackButton(panel);
 
@@ -1138,6 +1377,27 @@
         req.className = "doc-required";
         req.textContent = "必須";
         nameWrap.appendChild(req);
+
+        // GMOサインのテンプレートに同梱される文書（実測データがあるものだけ表示）
+        var contained = DOCS[code].docs;
+        if (contained && contained.length){
+          var docsWrap = document.createElement("div");
+          docsWrap.className = "doc-docs";
+
+          var docsLabel = document.createElement("div");
+          docsLabel.className = "doc-docs-label";
+          docsLabel.textContent = "テンプレートに含まれる文書（" + contained.length + "点）";
+          docsWrap.appendChild(docsLabel);
+
+          var docsList = document.createElement("ul");
+          contained.forEach(function(docName){
+            var li = document.createElement("li");
+            li.textContent = docName;
+            docsList.appendChild(li);
+          });
+          docsWrap.appendChild(docsList);
+          nameWrap.appendChild(docsWrap);
+        }
 
         item.appendChild(tab);
         item.appendChild(nameWrap);
