@@ -6,14 +6,14 @@
 <title>契約書面 判定ツール｜操作マニュアル</title>
 <style>
   :root{
-    --paper:#F6F5F1;
-    --ink:#1A2238;
+    --paper:#FBFBF9;
+    --ink:#2A3149;
     --surface:#FFFFFF;
-    --line:#DCD7C9;
-    --accent:#8C2F39;
-    --accent-soft:rgba(140,47,57,0.10);
-    --slate:#5B5F6B;
-    --slate-soft:#8A8D96;
+    --line:#E9E6DE;
+    --accent:#B23A48;
+    --accent-soft:rgba(178,58,72,0.10);
+    --slate:#62677A;
+    --slate-soft:#9AA0AC;
     --new-badge:#5B7B5A;
     --new-badge-soft:rgba(91,123,90,0.12);
     --sans:"Yu Gothic","YuGothic","Hiragino Kaku Gothic ProN","Noto Sans JP","Meiryo",sans-serif;
@@ -47,14 +47,14 @@
     --new-badge-soft:rgba(143,192,141,0.14);
   }
   :root[data-theme="light"]{
-    --paper:#F6F5F1;
-    --ink:#1A2238;
+    --paper:#FBFBF9;
+    --ink:#2A3149;
     --surface:#FFFFFF;
-    --line:#DCD7C9;
-    --accent:#8C2F39;
-    --accent-soft:rgba(140,47,57,0.10);
-    --slate:#5B5F6B;
-    --slate-soft:#8A8D96;
+    --line:#E9E6DE;
+    --accent:#B23A48;
+    --accent-soft:rgba(178,58,72,0.10);
+    --slate:#62677A;
+    --slate-soft:#9AA0AC;
     --new-badge:#5B7B5A;
     --new-badge-soft:rgba(91,123,90,0.12);
   }
@@ -318,7 +318,7 @@
 
   /* ---------- Mock frame (faithful UI reproduction, always light — a real screen) ---------- */
   .mock-frame{
-    border:1px solid #DCD7C9;
+    border:1px solid #E9E6DE;
     background:#FFFFFF;
     margin:20px 0;
     box-shadow:0 1px 3px rgba(26,34,56,0.08);
@@ -329,16 +329,16 @@
     gap:7px;
     padding:9px 14px;
     background:#ECE9E2;
-    border-bottom:1px solid #DCD7C9;
+    border-bottom:1px solid #E9E6DE;
   }
-  .mock-dot{ width:7px; height:7px; border-radius:50%; background:#D3CFC5; display:inline-block; }
+  .mock-dot{ width:7px; height:7px; border-radius:50%; background:#DFDCD3; display:inline-block; }
   .mock-dot.a{ background:#C7838A; }
   .mock-url{
     font-family:ui-monospace,"SFMono-Regular",Consolas,monospace;
     font-size:11px;
     color:#7B7566;
     background:#FFFFFF;
-    border:1px solid #DCD7C9;
+    border:1px solid #E9E6DE;
     padding:3px 10px;
     margin-left:8px;
     flex:1 1 auto;
@@ -350,65 +350,69 @@
   .mock-body{
     padding:26px 28px 28px;
     font-family:"Noto Sans JP","Hiragino Kaku Gothic ProN",sans-serif;
-    color:#1A2238;
+    color:#2A3149;
   }
   .mock-trail{ display:flex; flex-wrap:wrap; gap:6px; margin-bottom:16px; }
   .mock-trail span.chip{
-    font-size:10.5px; color:#5B5F6B; background:#FFFFFF; border:1px solid #DCD7C9;
+    font-size:10.5px; color:#62677A; background:#FFFFFF; border:1px solid #E9E6DE;
     padding:3px 9px; display:inline-flex; align-items:center;
   }
-  .mock-trail span.arrow{ color:#8A8D96; font-size:11px; align-self:center; }
+  .mock-trail span.arrow{ color:#9AA0AC; font-size:11px; align-self:center; }
   .mock-tag{
-    font-size:10.5px; letter-spacing:0.12em; color:#8A8D96; font-weight:700;
+    font-size:10.5px; letter-spacing:0.12em; color:#9AA0AC; font-weight:700;
     margin:0 0 10px; text-transform:uppercase;
   }
   .mock-q{ font-size:16.5px; font-weight:700; margin:0 0 8px; line-height:1.55; }
-  .mock-sub{ font-size:12.5px; color:#5B5F6B; line-height:1.8; margin:0 0 20px; max-width:46ch; }
+  .mock-sub{ font-size:12.5px; color:#62677A; line-height:1.8; margin:0 0 20px; max-width:46ch; }
   .mock-choices{ display:flex; flex-direction:column; gap:8px; }
   .mock-group-label{
-    font-size:10.5px; letter-spacing:0.1em; color:#8A8D96; font-weight:700;
+    font-size:10.5px; letter-spacing:0.1em; color:#9AA0AC; font-weight:700;
     padding:10px 0 2px; text-transform:uppercase;
   }
   .mock-group-label:first-child{ padding-top:0; }
-  .mock-group-label:not(:first-child){ border-top:1px solid #DCD7C9; margin-top:2px; }
+  .mock-group-label:not(:first-child){ border-top:1px solid #E9E6DE; margin-top:2px; }
   .mock-choice{
     display:flex; align-items:center; justify-content:space-between; gap:14px;
-    border:1px solid #DCD7C9; border-left:3px solid #DCD7C9;
+    border:1px solid #E9E6DE; border-left:3px solid #E9E6DE;
     padding:13px 16px; font-size:13.5px; font-weight:500;
   }
-  .mock-choice .m-sub{ display:block; font-size:11px; color:#8A8D96; font-weight:400; margin-top:2px; }
-  .mock-choice .m-arrow{ color:#8A8D96; font-size:13px; flex-shrink:0; }
+  .mock-choice .m-sub{ display:block; font-size:11px; color:#9AA0AC; font-weight:400; margin-top:2px; }
+  .mock-choice .m-arrow{ color:#9AA0AC; font-size:13px; flex-shrink:0; }
   .mock-choice.is-pick{
-    border-color:#1A2238; border-left-color:#8C2F39; background:#FBFAF8;
+    border-color:#2A3149; border-left-color:#B23A48; background:#FBFAF8;
   }
-  .mock-choice.is-pick .m-arrow{ color:#8C2F39; }
+  .mock-choice.is-pick .m-arrow{ color:#B23A48; }
   .mock-pick-flag{
     font-family:ui-monospace,SFMono-Regular,Consolas,monospace;
-    font-size:10.5px; color:#8C2F39; font-weight:700; letter-spacing:0.04em;
+    font-size:10.5px; color:#B23A48; font-weight:700; letter-spacing:0.04em;
     margin-left:10px; white-space:nowrap;
   }
 
   .mock-status{
     display:inline-flex; font-size:10.5px; letter-spacing:0.06em; font-weight:700;
-    color:#8C2F39; border:1px solid #8C2F39; padding:3px 10px; margin-bottom:14px;
+    color:#B23A48; border:1px solid #B23A48; padding:3px 10px; margin-bottom:14px;
   }
-  .mock-doclist{ display:flex; flex-direction:column; gap:8px; margin:16px 0 4px; border-top:1px solid #DCD7C9; padding-top:12px; }
-  .mock-docitem{ display:flex; align-items:flex-start; gap:14px; padding:14px 16px; background:#FBF8F4; border:1px solid #DCD7C9; border-left:3px solid #8C2F39; }
-  .mock-doctab{ flex-shrink:0; width:64px; text-align:center; padding:5px 3px; background:#8C2F39; color:#fff; font-size:10px; font-weight:700; font-family:ui-monospace,monospace; }
+  .mock-doclist{ display:flex; flex-direction:column; gap:8px; margin:16px 0 4px; border-top:1px solid #E9E6DE; padding-top:12px; }
+  .mock-docitem{ display:flex; align-items:flex-start; gap:14px; padding:14px 16px; background:#FDFAFA; border:1px solid #E9E6DE; border-left:3px solid #B23A48; }
+  .mock-doctab{ flex-shrink:0; width:64px; text-align:center; padding:5px 3px; background:#B23A48; color:#fff; font-size:10px; font-weight:700; font-family:ui-monospace,monospace; }
   .mock-docname{ font-size:13px; font-weight:600; line-height:1.6; }
-  .mock-docreq{ font-size:9px; font-weight:700; color:#8C2F39; background:rgba(140,47,57,0.09); letter-spacing:0.05em; display:inline-block; padding:2px 7px; margin-top:6px; }
-  .mock-cta-row{ display:flex; flex-wrap:wrap; gap:10px; margin-top:18px; padding-top:18px; border-top:1px solid #DCD7C9; }
-  .mock-cta{ flex:1 1 180px; padding:12px 15px; font-size:12.5px; font-weight:600; border:1px solid #1A2238; display:flex; align-items:center; justify-content:space-between; }
-  .mock-cta.primary{ background:#1A2238; color:#fff; }
-  .mock-cta.secondary{ background:#fff; color:#1A2238; border-left:3px solid #8C2F39; }
+  .mock-docreq{ font-size:9px; font-weight:700; color:#B23A48; background:rgba(178,58,72,0.09); letter-spacing:0.05em; display:inline-block; padding:2px 7px; margin-top:6px; }
+  .mock-docdocs{ margin-top:10px; padding-top:8px; border-top:1px dashed #E9E6DE; }
+  .mock-docdocs-label{ font-size:9.5px; font-weight:700; letter-spacing:0.06em; color:#62677A; margin-bottom:5px; }
+  .mock-docdocs ul{ margin:0; padding-left:1.1em; list-style:disc; }
+  .mock-docdocs li{ font-size:11px; line-height:1.8; }
+  .mock-cta-row{ display:flex; flex-wrap:wrap; gap:10px; margin-top:18px; padding-top:18px; border-top:1px solid #E9E6DE; }
+  .mock-cta{ flex:1 1 180px; padding:12px 15px; font-size:12.5px; font-weight:600; border:1px solid #2A3149; display:flex; align-items:center; justify-content:space-between; }
+  .mock-cta.primary{ background:#2A3149; color:#fff; }
+  .mock-cta.secondary{ background:#fff; color:#2A3149; border-left:3px solid #B23A48; }
 
   .mock-backlink{
-    display:inline-flex; align-items:center; gap:6px; font-size:11.5px; font-weight:600; color:#5B5F6B;
-    background:#fff; border:1px solid #DCD7C9; padding:7px 14px; margin-bottom:18px;
+    display:inline-flex; align-items:center; gap:6px; font-size:11.5px; font-weight:600; color:#62677A;
+    background:#fff; border:1px solid #E9E6DE; padding:7px 14px; margin-bottom:18px;
   }
-  .mock-restart-row{ display:flex; align-items:center; justify-content:space-between; gap:14px; flex-wrap:wrap; margin-top:20px; padding-top:16px; border-top:1px solid #DCD7C9; }
-  .mock-restart-note{ font-size:11px; color:#8A8D96; max-width:280px; }
-  .mock-btn-primary{ background:#1A2238; color:#fff; border:1px solid #1A2238; font-size:12px; font-weight:600; padding:10px 20px; flex-shrink:0; }
+  .mock-restart-row{ display:flex; align-items:center; justify-content:space-between; gap:14px; flex-wrap:wrap; margin-top:20px; padding-top:16px; border-top:1px solid #E9E6DE; }
+  .mock-restart-note{ font-size:11px; color:#9AA0AC; max-width:280px; }
+  .mock-btn-primary{ background:#2A3149; color:#fff; border:1px solid #2A3149; font-size:12px; font-weight:600; padding:10px 20px; flex-shrink:0; }
 
 
   /* ---------- Interactive demo (functional, reuses same visual language) ---------- */
@@ -417,45 +421,45 @@
     font-size:12px; color:var(--slate); background:var(--accent-soft);
     border:1px solid var(--line); padding:10px 14px; margin-bottom:16px;
   }
-  .demo-frame{ border:1px solid #DCD7C9; background:#FFFFFF; box-shadow:0 1px 3px rgba(26,34,56,0.08); }
-  .demo-body{ padding:26px 28px 28px; font-family:"Noto Sans JP","Hiragino Kaku Gothic ProN",sans-serif; color:#1A2238; min-height:260px; }
+  .demo-frame{ border:1px solid #E9E6DE; background:#FFFFFF; box-shadow:0 1px 3px rgba(26,34,56,0.08); }
+  .demo-body{ padding:26px 28px 28px; font-family:"Noto Sans JP","Hiragino Kaku Gothic ProN",sans-serif; color:#2A3149; min-height:260px; }
   .demo-trail{ display:flex; flex-wrap:wrap; gap:6px; margin-bottom:16px; min-height:20px; }
-  .demo-trail .chip{ font-size:10.5px; color:#5B5F6B; background:#FFFFFF; border:1px solid #DCD7C9; padding:3px 9px; }
-  .demo-trail .arrow{ color:#8A8D96; font-size:11px; align-self:center; }
-  .demo-tag{ font-size:10.5px; letter-spacing:0.12em; color:#8A8D96; font-weight:700; margin:0 0 10px; text-transform:uppercase; }
+  .demo-trail .chip{ font-size:10.5px; color:#62677A; background:#FFFFFF; border:1px solid #E9E6DE; padding:3px 9px; }
+  .demo-trail .arrow{ color:#9AA0AC; font-size:11px; align-self:center; }
+  .demo-tag{ font-size:10.5px; letter-spacing:0.12em; color:#9AA0AC; font-weight:700; margin:0 0 10px; text-transform:uppercase; }
   .demo-q{ font-size:16.5px; font-weight:700; margin:0 0 8px; }
-  .demo-sub{ font-size:12.5px; color:#5B5F6B; line-height:1.8; margin:0 0 20px; max-width:46ch; }
+  .demo-sub{ font-size:12.5px; color:#62677A; line-height:1.8; margin:0 0 20px; max-width:46ch; }
   .demo-choices{ display:flex; flex-direction:column; gap:8px; }
-  .demo-group-label{ font-size:10.5px; letter-spacing:0.1em; color:#8A8D96; font-weight:700; padding:10px 0 2px; text-transform:uppercase; }
+  .demo-group-label{ font-size:10.5px; letter-spacing:0.1em; color:#9AA0AC; font-weight:700; padding:10px 0 2px; text-transform:uppercase; }
   .demo-group-label:first-child{ padding-top:0; }
-  .demo-group-label:not(:first-child){ border-top:1px solid #DCD7C9; margin-top:2px; }
+  .demo-group-label:not(:first-child){ border-top:1px solid #E9E6DE; margin-top:2px; }
   .demo-choice-btn{
-    text-align:left; width:100%; background:#fff; border:1px solid #DCD7C9; border-left:3px solid #DCD7C9;
-    padding:13px 16px; font-family:inherit; font-size:13.5px; font-weight:500; color:#1A2238; cursor:pointer;
+    text-align:left; width:100%; background:#fff; border:1px solid #E9E6DE; border-left:3px solid #E9E6DE;
+    padding:13px 16px; font-family:inherit; font-size:13.5px; font-weight:500; color:#2A3149; cursor:pointer;
     display:flex; align-items:center; justify-content:space-between; gap:14px;
     transition:border-color 120ms ease, background 120ms ease;
   }
-  .demo-choice-btn .sub{ display:block; font-size:11px; color:#8A8D96; font-weight:400; margin-top:2px; }
-  .demo-choice-btn .arrow{ color:#8A8D96; font-size:13px; flex-shrink:0; transition:transform 120ms ease; }
-  .demo-choice-btn:hover{ border-color:#1A2238; border-left-color:#8C2F39; background:#FBFAF8; }
-  .demo-choice-btn:hover .arrow{ transform:translateX(3px); color:#8C2F39; }
-  .demo-choice-btn:focus-visible{ outline:2px solid #8C2F39; outline-offset:2px; }
+  .demo-choice-btn .sub{ display:block; font-size:11px; color:#9AA0AC; font-weight:400; margin-top:2px; }
+  .demo-choice-btn .arrow{ color:#9AA0AC; font-size:13px; flex-shrink:0; transition:transform 120ms ease; }
+  .demo-choice-btn:hover{ border-color:#2A3149; border-left-color:#B23A48; background:#FBFAF8; }
+  .demo-choice-btn:hover .arrow{ transform:translateX(3px); color:#B23A48; }
+  .demo-choice-btn:focus-visible{ outline:2px solid #B23A48; outline-offset:2px; }
   .demo-back{
-    display:inline-flex; align-items:center; gap:6px; font-family:inherit; font-size:11.5px; font-weight:600; color:#5B5F6B;
-    background:#fff; border:1px solid #DCD7C9; cursor:pointer; padding:7px 14px; margin-bottom:18px;
+    display:inline-flex; align-items:center; gap:6px; font-family:inherit; font-size:11.5px; font-weight:600; color:#62677A;
+    background:#fff; border:1px solid #E9E6DE; cursor:pointer; padding:7px 14px; margin-bottom:18px;
   }
-  .demo-back:hover{ color:#1A2238; border-color:#1A2238; }
-  .demo-status{ display:inline-flex; font-size:10.5px; letter-spacing:0.06em; font-weight:700; color:#8C2F39; border:1px solid #8C2F39; padding:3px 10px; margin-bottom:14px; }
-  .demo-doclist{ display:flex; flex-direction:column; gap:8px; margin:16px 0 4px; border-top:1px solid #DCD7C9; padding-top:12px; }
-  .demo-docitem{ display:flex; align-items:flex-start; gap:14px; padding:14px 16px; background:#FBF8F4; border:1px solid #DCD7C9; border-left:3px solid #8C2F39; }
-  .demo-doctab{ flex-shrink:0; width:64px; text-align:center; padding:5px 3px; background:#8C2F39; color:#fff; font-size:10px; font-weight:700; font-family:ui-monospace,monospace; }
+  .demo-back:hover{ color:#2A3149; border-color:#2A3149; }
+  .demo-status{ display:inline-flex; font-size:10.5px; letter-spacing:0.06em; font-weight:700; color:#B23A48; border:1px solid #B23A48; padding:3px 10px; margin-bottom:14px; }
+  .demo-doclist{ display:flex; flex-direction:column; gap:8px; margin:16px 0 4px; border-top:1px solid #E9E6DE; padding-top:12px; }
+  .demo-docitem{ display:flex; align-items:flex-start; gap:14px; padding:14px 16px; background:#FDFAFA; border:1px solid #E9E6DE; border-left:3px solid #B23A48; }
+  .demo-doctab{ flex-shrink:0; width:64px; text-align:center; padding:5px 3px; background:#B23A48; color:#fff; font-size:10px; font-weight:700; font-family:ui-monospace,monospace; }
   .demo-docname{ font-size:13px; font-weight:600; line-height:1.6; }
-  .demo-docreq{ font-size:9px; font-weight:700; color:#8C2F39; background:rgba(140,47,57,0.09); letter-spacing:0.05em; display:inline-block; padding:2px 7px; margin-top:6px; }
-  .demo-restart-row{ display:flex; align-items:center; justify-content:space-between; gap:14px; flex-wrap:wrap; margin-top:20px; padding-top:16px; border-top:1px solid #DCD7C9; }
-  .demo-restart-note{ font-size:11px; color:#8A8D96; max-width:280px; }
-  .demo-btn-primary{ background:#1A2238; color:#fff; border:1px solid #1A2238; font-family:inherit; font-size:12px; font-weight:600; padding:10px 20px; cursor:pointer; flex-shrink:0; }
+  .demo-docreq{ font-size:9px; font-weight:700; color:#B23A48; background:rgba(178,58,72,0.09); letter-spacing:0.05em; display:inline-block; padding:2px 7px; margin-top:6px; }
+  .demo-restart-row{ display:flex; align-items:center; justify-content:space-between; gap:14px; flex-wrap:wrap; margin-top:20px; padding-top:16px; border-top:1px solid #E9E6DE; }
+  .demo-restart-note{ font-size:11px; color:#9AA0AC; max-width:280px; }
+  .demo-btn-primary{ background:#2A3149; color:#fff; border:1px solid #2A3149; font-family:inherit; font-size:12px; font-weight:600; padding:10px 20px; cursor:pointer; flex-shrink:0; }
   .demo-btn-primary:hover{ background:#2A3458; }
-  .demo-empty{ font-size:13px; color:#5B5F6B; line-height:1.8; padding:14px 0; border-top:1px solid #DCD7C9; margin-top:16px; }
+  .demo-empty{ font-size:13px; color:#62677A; line-height:1.8; padding:14px 0; border-top:1px solid #E9E6DE; margin-top:16px; }
 
   /* ---------- FAQ ---------- */
   details.faq{ border-bottom:1px solid var(--line); padding:16px 0; }
@@ -499,7 +503,7 @@
   <header class="cover">
     <p class="cover-eyebrow">SALES-DOC GUIDE — 使い方マニュアル</p>
     <h1>契約書面 判定ツール<br>操作マニュアル</h1>
-    <p class="cover-lede">サイトマイスター・ホームページリメイクスタジオの新規契約時、主契約・プラン・オプション・キャッシュバックの選択内容にもとづいて、準備すべき契約書面を自動判定するツールの使い方を、画面例つきで説明します。</p>
+    <p class="cover-lede">サイトマイスター／ホームページリメイクスタジオ／EPRESS MEO・SNS／MEOエージェントの新規契約時、選択内容にもとづいて準備すべき契約書面を自動判定するツールの使い方を、画面例つきで説明します。</p>
     <dl class="cover-meta">
       <div>
         <dt>公開URL</dt>
@@ -507,11 +511,11 @@
       </div>
       <div>
         <dt>対象</dt>
-        <dd>サイトマイスター営業担当者</dd>
+        <dd>契約書面を準備する営業担当者</dd>
       </div>
       <div>
         <dt>最終更新</dt>
-        <dd>2026.08.18</dd>
+        <dd>2026.08.25</dd>
       </div>
     </dl>
   </header>
@@ -547,6 +551,20 @@
       </ul>
     </div>
     <div class="sidebar-group">
+      <p class="sidebar-group-label">EPRESS MEO・SNS</p>
+      <ul>
+        <li><a href="#epress-service">STEP2 対象サービス</a></li>
+        <li><a href="#epress-plan">STEP3 プラン</a></li>
+        <li><a href="#epress-addon">STEP4 追加サービス</a></li>
+      </ul>
+    </div>
+    <div class="sidebar-group">
+      <p class="sidebar-group-label">MEOエージェント</p>
+      <ul>
+        <li><a href="#mea">STEP2 追加サービス</a></li>
+      </ul>
+    </div>
+    <div class="sidebar-group">
       <p class="sidebar-group-label">判定結果</p>
       <ul>
         <li><a href="#result">判定結果の見方</a></li>
@@ -568,7 +586,7 @@
     <section id="overview" class="doc-section">
       <p class="sec-tag">Overview</p>
       <h2>ツールの概要</h2>
-      <p class="intro">新商材の契約時、主契約・プラン・オプション・キャッシュバックの組み合わせによって、GMOサインで用意すべき契約申込書が変わります。本ツールは3つのSTEPの質問に答えるだけで、必要な書面一覧を自動判定します。STEP1で選んだ主契約によって、STEP2以降の質問内容が変わります。</p>
+      <p class="intro">新商材の契約時、主契約・プラン・オプション・キャッシュバックの組み合わせによって、GMOサインで用意すべき契約申込書が変わります。本ツールは最大4つのSTEPの質問に答えるだけで、必要な書面一覧を自動判定します。STEP1で選んだ主契約によって、STEP2以降の質問内容とSTEP数が変わります。</p>
 
       <h3 class="sub-h">全体の流れ（サイトマイスター）</h3>
       <div class="mock-trail" style="margin-bottom:6px;">
@@ -588,6 +606,24 @@
       </div>
       <p class="caption">プラン（AIゼロ／AIブースト）とオプション内容の組み合わせで、RM-01〜08のうち1枚が決まります。キャッシュバックの選択はありません。</p>
 
+      <h3 class="sub-h">全体の流れ（EPRESS MEO・SNS）</h3>
+      <div class="mock-trail" style="margin-bottom:6px;">
+        <span class="chip">STEP1 主契約</span><span class="arrow">›</span>
+        <span class="chip">STEP2 対象サービス</span><span class="arrow">›</span>
+        <span class="chip">STEP3 プラン</span><span class="arrow">›</span>
+        <span class="chip">STEP4 追加サービス</span><span class="arrow">›</span>
+        <span class="chip">判定結果</span>
+      </div>
+      <p class="caption">対象サービス（MEOのみ／SNSのみ／両方）とプラン、MEOエージェント・GBP管理代行の有無で、18種類の申込みテンプレートから1つが決まります。判定される書面は常に1つです。</p>
+
+      <h3 class="sub-h">全体の流れ（MEOエージェント単独）</h3>
+      <div class="mock-trail" style="margin-bottom:6px;">
+        <span class="chip">STEP1 主契約</span><span class="arrow">›</span>
+        <span class="chip">STEP2 追加サービス</span><span class="arrow">›</span>
+        <span class="chip">判定結果</span>
+      </div>
+      <p class="caption">EPRESS MEO・SNS を伴わないMEOエージェント単体の契約です。GBP管理代行・GSVオプションの有無だけでMEA-01・MEA-02のどちらかが決まります。</p>
+
       <p class="caption" style="margin-top:18px;">各STEPで選択した内容は画面上部にパンくずとして積み上がっていきます。回答は自動保存されないため、離脱した場合は最初からやり直しになります。</p>
     </section>
 
@@ -599,12 +635,12 @@
       <div class="mock-frame">
         <div class="mock-chrome"><span class="mock-dot"></span><span class="mock-dot"></span><span class="mock-dot a"></span><span class="mock-url">hps-intra.com/docs/contract/</span></div>
         <div class="mock-body" style="display:flex; flex-direction:column; align-items:flex-start;">
-          <p class="mock-tag" style="color:#8C2F39;">アクセス制限</p>
+          <p class="mock-tag" style="color:#B23A48;">アクセス制限</p>
           <p class="mock-q">認証コードを入力してください</p>
           <p class="mock-sub">このページは社内限定の営業支援ツールです。認証コードを入力してください。</p>
           <div style="display:flex; gap:8px; width:100%; max-width:360px;">
-            <div style="flex:1; border:1px solid #DCD7C9; padding:11px 14px; font-size:13px; color:#8A8D96;">認証コードを入力</div>
-            <div style="background:#1A2238; color:#fff; font-size:12.5px; font-weight:600; padding:11px 18px; white-space:nowrap;">認証する</div>
+            <div style="flex:1; border:1px solid #E9E6DE; padding:11px 14px; font-size:13px; color:#9AA0AC;">認証コードを入力</div>
+            <div style="background:#2A3149; color:#fff; font-size:12.5px; font-weight:600; padding:11px 18px; white-space:nowrap;">認証する</div>
           </div>
         </div>
       </div>
@@ -623,12 +659,14 @@
           <p class="mock-q">主契約のサービスを選択してください</p>
           <p class="mock-sub">今回ご契約いただく商材の主契約サービスを選択してください。</p>
           <div class="mock-choices">
-            <div class="mock-choice is-pick">サイトマイスター <span class="mock-pick-flag">選択する</span><span class="m-arrow">→</span></div>
+            <div class="mock-choice">サイトマイスター<span class="m-arrow">→</span></div>
             <div class="mock-choice">ホームページリメイクスタジオ<span class="m-arrow">→</span></div>
+            <div class="mock-choice is-pick">EPRESS MEO・SNS <span class="mock-pick-flag">選択する</span><br><span class="m-sub" style="margin-top:2px; display:block;">EPRESS MEO／EPRESS SNS／MEO＆SNS のいずれかを含む契約</span><span class="m-arrow">→</span></div>
+            <div class="mock-choice">MEOエージェント（単独）<br><span class="m-sub" style="margin-top:2px; display:block;">EPRESS MEO・SNS を伴わないMEOエージェント単体の契約</span><span class="m-arrow">→</span></div>
           </div>
         </div>
       </div>
-      <div class="callout"><strong>分岐の違い：</strong>「サイトマイスター」を選ぶと<a href="#step2">STEP2 オプション</a>へ、「ホームページリメイクスタジオ」を選ぶと<a href="#remake">STEP2 プラン</a>へ進みます。リメイクスタジオはキャッシュバックの選択がなく、STEP3のオプション選択で判定が完了します。</div>
+      <div class="callout"><strong>分岐の違い：</strong>「サイトマイスター」は<a href="#step2">STEP2 オプション</a>へ、「ホームページリメイクスタジオ」は<a href="#remake">STEP2 プラン</a>へ、「EPRESS MEO・SNS」は<a href="#epress-service">STEP2 対象サービス</a>へ、「MEOエージェント（単独）」は<a href="#mea">STEP2 追加サービス</a>へ進みます。キャッシュバックの選択があるのはサイトマイスターだけです。</div>
     </section>
 
     <section id="step2" class="doc-section">
@@ -865,6 +903,163 @@
       <div class="callout"><strong>ここに注意：</strong>ホームページリメイクスタジオはキャッシュバックの選択STEPがありません。必要な書面はRM-01〜08のうち常に1枚だけです。複数年契約キャッシュバックや導入事例掲載プログラムのご相談があった場合は、営業サポート担当にご確認ください。</div>
     </section>
 
+    <section id="epress-service" class="doc-section">
+      <p class="sec-tag">Step 2 — EPRESS MEO・SNS<span class="new-badge">2026.08.25 追加</span></p>
+      <h2>対象サービスを選択する</h2>
+      <p class="intro">STEP1で「EPRESS MEO・SNS」を選ぶと、対象サービスの選択に進みます。EPRESS MEO と EPRESS SNS は、単独契約とセット契約で申込みテンプレートが分かれるため、まずどの組み合わせかを選択します。</p>
+
+      <div class="mock-frame">
+        <div class="mock-chrome"><span class="mock-dot"></span><span class="mock-dot"></span><span class="mock-dot a"></span><span class="mock-url">hps-intra.com/docs/contract/</span></div>
+        <div class="mock-body">
+          <div class="mock-trail"><span class="chip">01 EPRESS MEO・SNS</span></div>
+          <p class="mock-tag">STEP 2 — 対象サービス</p>
+          <p class="mock-q">ご契約いただくサービスを選択してください</p>
+          <p class="mock-sub">EPRESS MEO と EPRESS SNS は、単独契約とセット契約で申込みテンプレートが分かれます。</p>
+          <div class="mock-choices">
+            <div class="mock-choice is-pick">EPRESS MEO のみ <span class="mock-pick-flag">選択する</span><span class="m-arrow">→</span></div>
+            <div class="mock-choice">EPRESS SNS のみ<span class="m-arrow">→</span></div>
+            <div class="mock-choice">EPRESS MEO ＆ SNS 両方<span class="m-arrow">→</span></div>
+          </div>
+        </div>
+      </div>
+      <p class="caption">ここで選んだ内容によって、次のSTEP3で表示されるプランの選択肢が変わります。</p>
+    </section>
+
+    <section id="epress-plan" class="doc-section">
+      <p class="sec-tag">Step 3 — EPRESS MEO・SNS<span class="new-badge">2026.08.25 追加</span></p>
+      <h2>プランを選択する</h2>
+      <p class="intro">対象サービスごとに、テンプレートが分かれるプランを選択します。EPRESS MEO のスタンダードとプレミアムは同一のテンプレートを使うため、ひとつの選択肢にまとまっています。</p>
+
+      <div class="mock-frame">
+        <div class="mock-chrome"><span class="mock-dot"></span><span class="mock-dot"></span><span class="mock-dot a"></span><span class="mock-url">hps-intra.com/docs/contract/</span></div>
+        <div class="mock-body">
+          <div class="mock-trail"><span class="chip">01 EPRESS MEO・SNS</span><span class="arrow">›</span><span class="chip">02 MEOのみ</span></div>
+          <p class="mock-tag">STEP 3 — プラン</p>
+          <p class="mock-q">ご契約いただくプランを選択してください</p>
+          <p class="mock-sub">EPRESS MEO は「スタンダード・プレミアム」と「ライト」で申込みテンプレートが分かれます。スタンダードとプレミアムは同一のテンプレートです。</p>
+          <div class="mock-choices">
+            <div class="mock-choice is-pick">スタンダード・プレミアム <span class="mock-pick-flag">選択する</span><span class="m-arrow">→</span></div>
+            <div class="mock-choice">ライト<span class="m-arrow">→</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ref-table-wrap">
+        <table class="ref-table">
+          <caption>対象サービスごとのプラン選択肢</caption>
+          <thead><tr><th>対象サービス</th><th>選択肢</th></tr></thead>
+          <tbody>
+            <tr><td>EPRESS MEO のみ</td><td>スタンダード・プレミアム ／ ライト</td></tr>
+            <tr><td>EPRESS SNS のみ</td><td>スタンダード ／ シンプル</td></tr>
+            <tr><td>EPRESS MEO ＆ SNS 両方</td><td>MEO スタンダード・プレミアム ＆ SNS スタンダード ／ MEO ライト ＆ SNS シンプル</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="callout"><strong>ここに注意：</strong>セット契約のテンプレートは上記2つの組み合わせだけです。「MEOライト＆SNSスタンダード」のようにグレードをまたぐ組み合わせのテンプレートは登録されていません。該当する受注があった場合は営業サポート担当にご確認ください。</div>
+    </section>
+
+    <section id="epress-addon" class="doc-section">
+      <p class="sec-tag">Step 4 — EPRESS MEO・SNS<span class="new-badge">2026.08.25 追加</span></p>
+      <h2>追加サービスの有無を選択する</h2>
+      <p class="intro">MEOエージェント、GBP管理代行サービス・GSVオプションをあわせて契約するかどうかで、テンプレートが分かれます。質問の内容は対象サービスによって変わります。</p>
+
+      <h3 class="sub-h">4-1. EPRESS MEO のみ／MEO ＆ SNS の場合</h3>
+      <div class="mock-frame">
+        <div class="mock-chrome"><span class="mock-dot"></span><span class="mock-dot"></span><span class="mock-dot a"></span><span class="mock-url">hps-intra.com/docs/contract/</span></div>
+        <div class="mock-body">
+          <div class="mock-trail"><span class="chip">01 EPRESS MEO・SNS</span><span class="arrow">›</span><span class="chip">02 MEOのみ</span><span class="arrow">›</span><span class="chip">03 MEO スタンダード・プレミアム</span></div>
+          <p class="mock-tag">STEP 4 — 追加サービス</p>
+          <p class="mock-q">MEOエージェントのご契約はありますか？</p>
+          <p class="mock-sub">EPRESS MEO を含むテンプレートは、GBP管理代行サービス・GSVオプションを含む構成のみが登録されています。</p>
+          <div class="mock-choices">
+            <div class="mock-choice">MEOエージェントなし<br><span class="m-sub" style="margin-top:2px; display:block;">GBP管理代行・GSVオプションは同梱</span><span class="m-arrow">→</span></div>
+            <div class="mock-choice is-pick">MEOエージェントあり <span class="mock-pick-flag">選択する</span><br><span class="m-sub" style="margin-top:2px; display:block;">GBP管理代行・GSVオプションは同梱</span><span class="m-arrow">→</span></div>
+          </div>
+        </div>
+      </div>
+      <p class="caption">EPRESS MEO は GBP管理代行サービスの申込が必須の商材です。そのためGBPの有無は質問されず、MEOエージェントの有無だけを選択します。</p>
+
+      <h3 class="sub-h">4-2. EPRESS SNS のみの場合</h3>
+      <div class="mock-frame">
+        <div class="mock-chrome"><span class="mock-dot"></span><span class="mock-dot"></span><span class="mock-dot a"></span><span class="mock-url">hps-intra.com/docs/contract/</span></div>
+        <div class="mock-body">
+          <div class="mock-trail"><span class="chip">01 EPRESS MEO・SNS</span><span class="arrow">›</span><span class="chip">02 SNSのみ</span><span class="arrow">›</span><span class="chip">03 SNS スタンダード</span></div>
+          <p class="mock-tag">STEP 4 — 追加サービス</p>
+          <p class="mock-q">あわせてご契約いただくサービスを選択してください</p>
+          <p class="mock-sub">MEOエージェント、GBP管理代行サービス・GSVオプションの有無で申込みテンプレートが分かれます。</p>
+          <div class="mock-choices">
+            <div class="mock-choice">追加サービスなし<span class="m-arrow">→</span></div>
+            <div class="mock-choice">MEOエージェントのみ<span class="m-arrow">→</span></div>
+            <div class="mock-choice is-pick">GBP管理代行・GSVオプションのみ <span class="mock-pick-flag">選択する</span><span class="m-arrow">→</span></div>
+            <div class="mock-choice">MEOエージェント・GBP管理代行・GSV 両方<span class="m-arrow">→</span></div>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="sub-h">選択と判定される書面（全18パターン）</h3>
+      <div class="ref-table-wrap">
+        <table class="ref-table">
+          <caption>EPRESS MEO のみ</caption>
+          <thead><tr><th>プラン</th><th>MEOエージェントなし</th><th>MEOエージェントあり</th></tr></thead>
+          <tbody>
+            <tr><td>スタンダード・プレミアム</td><td class="code">MEO-01</td><td class="code">MEO-02</td></tr>
+            <tr><td>ライト</td><td class="code">MEO-03</td><td class="code">MEO-04</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="ref-table-wrap">
+        <table class="ref-table">
+          <caption>EPRESS SNS のみ</caption>
+          <thead><tr><th>プラン</th><th>追加なし</th><th>MEOエージェントのみ</th><th>GBP・GSVのみ</th><th>両方</th></tr></thead>
+          <tbody>
+            <tr><td>スタンダード</td><td class="code">SNS-01</td><td class="code">SNS-02</td><td class="code">SNS-03</td><td class="code">SNS-04</td></tr>
+            <tr><td>シンプル</td><td class="code">SNS-05</td><td class="code">SNS-06</td><td class="code">SNS-07</td><td class="code">SNS-08</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="ref-table-wrap">
+        <table class="ref-table">
+          <caption>EPRESS MEO ＆ SNS 両方</caption>
+          <thead><tr><th>プランの組み合わせ</th><th>MEOエージェントなし</th><th>MEOエージェントあり</th></tr></thead>
+          <tbody>
+            <tr><td>MEO スタンダード・プレミアム ＆ SNS スタンダード</td><td class="code">MEO-SNS-01</td><td class="code">MEO-SNS-02</td></tr>
+            <tr><td>MEO ライト ＆ SNS シンプル</td><td class="code">MEO-SNS-03</td><td class="code">MEO-SNS-04</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="mea" class="doc-section">
+      <p class="sec-tag">Step 2 — MEOエージェント<span class="new-badge">2026.08.25 追加</span></p>
+      <h2>GBP管理代行・GSVオプションの有無を選択する</h2>
+      <p class="intro">STEP1で「MEOエージェント（単独）」を選ぶと、この質問だけで判定が完了します。EPRESS MEO・SNS を伴わないMEOエージェント単体の契約が対象です。</p>
+
+      <div class="mock-frame">
+        <div class="mock-chrome"><span class="mock-dot"></span><span class="mock-dot"></span><span class="mock-dot a"></span><span class="mock-url">hps-intra.com/docs/contract/</span></div>
+        <div class="mock-body">
+          <div class="mock-trail"><span class="chip">01 MEOエージェント</span></div>
+          <p class="mock-tag">STEP 2 — 追加サービス</p>
+          <p class="mock-q">GBP管理代行サービス・GSVオプションのご契約はありますか？</p>
+          <p class="mock-sub">MEOエージェント単独契約は、GBP管理代行サービス・GSVオプションの有無で申込みテンプレートが分かれます。</p>
+          <div class="mock-choices">
+            <div class="mock-choice is-pick">GBP管理代行・GSVオプションなし <span class="mock-pick-flag">選択する</span><span class="m-arrow">→</span></div>
+            <div class="mock-choice">GBP管理代行・GSVオプションあり<span class="m-arrow">→</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ref-table-wrap">
+        <table class="ref-table">
+          <caption>選択と判定される書面</caption>
+          <thead><tr><th>GBP管理代行・GSVオプション</th><th>書面</th></tr></thead>
+          <tbody>
+            <tr><td>なし</td><td class="code">MEA-01</td></tr>
+            <tr><td>あり</td><td class="code">MEA-02</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
     <section id="result" class="doc-section">
       <p class="sec-tag">Result</p>
       <h2>判定結果画面の見方</h2>
@@ -898,6 +1093,39 @@
         </div>
       </div>
       <p class="caption">「GMOサインを開く」は契約締結の実務に、「契約書・規約を確認する」はSharePoint上の書面ひな形フォルダにそれぞれ遷移します。選択内容によっては書面が0件（追加書面不要）の場合もあります。</p>
+
+      <h3 class="sub-h">テンプレートに含まれる文書（EPRESS MEO・SNS／MEOエージェント）<span class="new-badge">2026.08.25 追加</span></h3>
+      <p class="intro">EPRESS MEO・SNS と MEOエージェントの判定結果には、そのテンプレートに含まれる文書の一覧が表示されます。GMOサインでテンプレートを選ぶと、これらの文書がまとめて送信されます。個別に添付する必要はありません。</p>
+
+      <div class="mock-frame">
+        <div class="mock-chrome"><span class="mock-dot"></span><span class="mock-dot"></span><span class="mock-dot a"></span><span class="mock-url">hps-intra.com/docs/contract/</span></div>
+        <div class="mock-body">
+          <div class="mock-trail"><span class="chip">01 EPRESS MEO・SNS</span><span class="arrow">›</span><span class="chip">02 MEOのみ</span><span class="arrow">›</span><span class="chip">03 MEO スタンダード・プレミアム</span><span class="arrow">›</span><span class="chip">04 MEOエージェント</span></div>
+          <span class="mock-status">判定結果</span>
+          <p class="mock-q">必要な契約書面</p>
+          <p class="mock-sub">選択内容にもとづき、以下の書面をご準備ください。</p>
+          <div class="mock-doclist">
+            <div class="mock-docitem">
+              <div class="mock-doctab">MEO-02</div>
+              <div>
+                <div class="mock-docname">EPRESS MEO スタンダード・プレミアム申込み／MEOエージェント・GBP・GSV</div>
+                <span class="mock-docreq">必須</span>
+                <div class="mock-docdocs">
+                  <div class="mock-docdocs-label">テンプレートに含まれる文書（5点）</div>
+                  <ul>
+                    <li>EPRESS MEO SNS サポートパック,MEOエージェント 契約申込書</li>
+                    <li>EPRESS MEO SNS サポートパック、MEOエージェント 及び GBP管理代行サービス 内容確認書</li>
+                    <li>EPRESS-MEOサポートパック 利用規約</li>
+                    <li>GBP管理代行サービス利用規約</li>
+                    <li>MEOエージェント利用規約</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p class="caption">文書の点数はテンプレートによって3〜6点です。契約するサービスが増えるほど、対応する利用規約が加わります。この一覧はGMOサインの登録内容を実測したものです（2026.08.21時点）。</p>
     </section>
 
     <section id="navigation" class="doc-section">
@@ -961,6 +1189,22 @@
         <p>本ツールでは判定できません。ホームページリメイクスタジオはRM-01〜08の主契約書面のみを対象としているため、複数年契約キャッシュバックや導入事例掲載プログラムのご相談があった場合は、営業サポート担当にご確認ください。</p>
       </details>
       <details class="faq">
+        <summary>GSVオプションの有無で書面は変わる？</summary>
+        <p>変わりません。GSVオプションはGBP管理代行サービスとセットで扱われ、書面を分けているのはGBP管理代行の有無だけです。GSV固有の申込書・利用規約はありません。選択肢が「GBP管理代行・GSVオプション」の併記になっているのは、GMOサインのテンプレート名称にあわせているためです。</p>
+      </details>
+      <details class="faq">
+        <summary>EPRESS MEO でGBP管理代行の有無を聞かれないのはなぜ？</summary>
+        <p>EPRESS MEO はGBP管理代行サービスの申込が必須の商材で、単体では申し込めないためです。GMOサインのテンプレートもGBP管理代行を含む構成しか登録されていないため、質問せずに同梱として扱っています。EPRESS SNS 単独の場合のみ、GBP管理代行の有無を選択します。</p>
+      </details>
+      <details class="faq">
+        <summary>すでにGBP管理代行を契約しているお客様にEPRESS MEOを追加する場合は？</summary>
+        <p>同じテンプレート（MEO-01〜04）を使います。契約申込書が統合フォーマットになって以降、新規・既存を区別していません。</p>
+      </details>
+      <details class="faq">
+        <summary>MEO と SNS でグレードが違う組み合わせの受注が来たら？</summary>
+        <p>セット契約のテンプレートは「MEOスタンダード・プレミアム＆SNSスタンダード」「MEOライト＆SNSシンプル」の2種類だけです。それ以外の組み合わせは登録されていないため、営業サポート担当にご確認ください。</p>
+      </details>
+      <details class="faq">
         <summary>スマートフォンからも使える？</summary>
         <p>はい。レスポンシブ対応しているため、スマートフォン・タブレットからも同じ手順で操作できます。URLをブックマークしておくと便利です。</p>
       </details>
@@ -969,6 +1213,10 @@
     <section id="changelog" class="doc-section">
       <p class="sec-tag">Changelog</p>
       <h2>更新履歴</h2>
+      <div class="changelog-item">
+        <div class="changelog-date">2026.08.25</div>
+        <div class="changelog-desc"><span class="tag">NEW</span>EPRESS MEO・EPRESS SNS・MEOエージェントのGMOサインテンプレート18件に対応しました。対象サービス・プラン・追加サービスの選択で1つのテンプレートを判定し、判定結果にはテンプレートに含まれる文書の一覧を表示します。あわせてツール名を「契約書面 判定ツール」に変更し、画面の配色を明るくしました。</div>
+      </div>
       <div class="changelog-item">
         <div class="changelog-date">2026.08.18</div>
         <div class="changelog-desc"><span class="tag">NEW</span>ホームページリメイクスタジオのGMOサインテンプレート登録完了にあわせ、同商材の判定に対応しました。プラン（AIゼロ／AIブースト）とオプション内容の組み合わせで、RM-01〜08のうち1枚を判定します。あわせて「契約書準備中です」の案内画面を廃止しました。</div>
