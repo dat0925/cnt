@@ -829,6 +829,26 @@
   // MEOエージェント単独（GBP管理代行・GSVオプションの有無）
   var MEA_MATRIX = { "なし": "MEA-01", "あり": "MEA-02" };
 
+  // 商材ごとの契約書・規約フォルダ（SharePoint 組織内共有リンク）
+  // フォルダ名は商材ごとに揃っていない（「契約書-利用規約」「契約書-規約」「規約・契約書」）ので
+  // パスから機械的に組み立てず、実測した共有リンクをここで持つ。
+  // EPRESS MEO・SNS の最新一式（統合フォーマット 20260623）は
+  // MEOエージェント配下の「契約書-規約」に置かれているため、MEOエージェント単独と同じリンクを使う。
+  var SP_CONTRACT_LINKS = {
+    "サイトマイスター":               "https://eparkinc.sharepoint.com/:f:/s/IT_Solutions_Department/IgD8cGo7Ij1xRa7qS25_fJ_kAb3MRDoBwXZvSxZG_E1RuD0?e=sJjkag",
+    "ホームページリメイクスタジオ":   "https://eparkinc.sharepoint.com/:f:/s/IT_Solutions_Department/IgDoiut-D-srTammG1oSVzgMAdL5zn4HRqXO5JhldxpwbyM",
+    "EPRESS MEO・SNS":               "https://eparkinc.sharepoint.com/:f:/s/IT_Solutions_Department/IgBxgrJsH0vpTYK3G78P8YMCAdib3Uo40SOPua5NuD7YI0A",
+    "MEOエージェント":               "https://eparkinc.sharepoint.com/:f:/s/IT_Solutions_Department/IgBxgrJsH0vpTYK3G78P8YMCAdib3Uo40SOPua5NuD7YI0A"
+  };
+
+  // 商材ごとのフォルダ名（ボタンの説明文に出す。どこへ飛ぶか押す前に分かるようにする）
+  var SP_CONTRACT_LABELS = {
+    "サイトマイスター":               "サイトマイスター／契約書-利用規約",
+    "ホームページリメイクスタジオ":   "ホームページリメイクスタジオ／契約書-利用規約",
+    "EPRESS MEO・SNS":               "MEOエージェント／契約書-規約",
+    "MEOエージェント":               "MEOエージェント／契約書-規約"
+  };
+
   // 複数年契約キャッシュバックのプラン一覧（契約年数 × ベーシック/プレミアム）
   var CB_PLANS = {
     "01": { years: "2年契約", tier: "ベーシックプラン", amount: "10" },
@@ -1433,13 +1453,17 @@
       '<span class="cta-text">GMOサインを開く<span class="cta-sub">この書面の契約締結を進める</span></span>' +
       '<span class="cta-arrow">↗</span>';
 
+    // 契約書・規約フォルダは商材ごとに別。判定結果の主契約に対応するものを開く
+    var spHref = SP_CONTRACT_LINKS[path.mainContract] || SP_CONTRACT_LINKS["サイトマイスター"];
+    var spLabel = SP_CONTRACT_LABELS[path.mainContract] || "SharePointの書面フォルダを開く";
+
     var sp = document.createElement("a");
     sp.className = "cta-btn is-secondary";
-    sp.href = "https://eparkinc.sharepoint.com/:f:/s/IT_Solutions_Department/IgD8cGo7Ij1xRa7qS25_fJ_kAb3MRDoBwXZvSxZG_E1RuD0?e=sJjkag";
+    sp.href = spHref;
     sp.target = "_blank";
     sp.rel = "noopener noreferrer";
     sp.innerHTML =
-      '<span class="cta-text">契約書・規約を確認する<span class="cta-sub">SharePointの書面フォルダを開く</span></span>' +
+      '<span class="cta-text">契約書・規約を確認する<span class="cta-sub">' + spLabel + '</span></span>' +
       '<span class="cta-arrow">↗</span>';
 
     row.appendChild(gmo);
